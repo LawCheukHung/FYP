@@ -5,6 +5,9 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     private Camera playerCam;
+    private float camX, camY;
+    private float xSpeed = 5f;
+    private float ySpeed = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +18,9 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerCam.transform.eulerAngles = new Vector3();
+        camY -= xSpeed * Input.GetAxis("Mouse X");
+        camX -= ySpeed * Input.GetAxis("Mouse Y");
+
+        playerCam.transform.eulerAngles = new Vector3(camX, camY, 0f);
     }
 }
