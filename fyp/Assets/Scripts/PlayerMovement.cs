@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody playerRigi;
+    public CameraMovement cameraMovement;
     public float velocity = 10f;
 
     // Start is called before the first frame update
