@@ -6,6 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     private Camera playerCam;
     private float camX, camY;
+    private Vector3 camRotate;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,8 @@ public class CameraMovement : MonoBehaviour
     {
         camX = Screen.width / 2 + Input.GetAxis("Mouse X") * 10;
         camY = Screen.height / 2 + Input.GetAxis("Mouse Y") * 10;
+        camRotate = new Vector3(camX, camY, playerCam.nearClipPlane);
 
-        transform.LookAt(playerCam.ScreenToWorldPoint(new Vector3(camX, camY, playerCam.nearClipPlane)), Vector3.up);
+        transform.LookAt(playerCam.ScreenToWorldPoint(camRotate), Vector3.up);
     }
 }
