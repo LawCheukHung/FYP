@@ -6,21 +6,20 @@ public class CameraMovement : MonoBehaviour
 {
     private Camera playerCam;
     private float camX, camY;
-    private float xSpeed = 5f;
-    private float ySpeed = 5f;
 
     // Start is called before the first frame update
     void Start()
     {
         playerCam = GetComponent<Camera>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
-        camY -= xSpeed * Input.GetAxis("Mouse X");
-        camX -= ySpeed * Input.GetAxis("Mouse Y");
+        camX = Screen.width / 2 + Input.GetAxis("Mouse X") * 10;
+        camY = Screen.height / 2 + Input.GetAxis("Mouse Y") * 10;
 
-        playerCam.transform.eulerAngles = new Vector3(camX, camY, 0f);
+        transform.LookAt(playerCam.ScreenToWorldPoint(new Vector3(camX, camY, playerCam.nearClipPlane)), Vector3.up);
     }
 }
