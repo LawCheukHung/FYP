@@ -521,7 +521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoints: 1000
   slider: {fileID: 93269402}
-  SpeedOfDecrease: 5
+  defaultSpeedOfDecrease: 100
 --- !u!1 &404419607
 GameObject:
   m_ObjectHideFlags: 0

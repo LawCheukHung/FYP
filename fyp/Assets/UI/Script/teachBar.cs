@@ -9,7 +9,7 @@ public class teachBar : MonoBehaviour
     public Slider slider;
     public float defaultSpeedOfDecrease;
     float SpeedOfDecrease;
-    enum mouseState{};
+    bool isTeaching = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +35,18 @@ public class teachBar : MonoBehaviour
 
     public void teaching()
     {
-        
-        if (Input.GetMouseButtonDown(1))
-            setSpeedOfDecrease(false,defaultSpeedOfDecrease*2);
+        float speed = defaultSpeedOfDecrease * 2;
+        if (Input.GetMouseButton(1))
+        {
+            if (!isTeaching)
+                SpeedOfDecrease -= speed;
+            isTeaching = true;
+        }
+        else
+        {
+            if (isTeaching)
+                SpeedOfDecrease += speed;
+            isTeaching = false;
+        }
     }
 }
