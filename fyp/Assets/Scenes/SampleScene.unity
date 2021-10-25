@@ -357,8 +357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1468a99bd1e8e2499eb45a3e789b918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraMovement: {fileID: 963194229}
-  velocity: 10
+  playerCamera: {fileID: 963194227}
+  velocity: 3
 --- !u!65 &1106017647
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -386,7 +386,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!23 &1106017649
 MeshRenderer:

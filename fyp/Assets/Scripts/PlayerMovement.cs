@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody playerRigi;
-    public CameraMovement cameraMovement;
-    public float velocity = 10f;
+    public Camera playerCamera;
+    public float velocity = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,26 +19,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            Vector3 nInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            playerRigi.MovePosition(transform.position + nInput * velocity * Time.deltaTime);
+            transform.position += playerCamera.transform.forward * velocity * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            Vector3 nInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            playerRigi.MovePosition(transform.position + nInput * velocity * Time.deltaTime);
+            transform.position -= playerCamera.transform.right * velocity * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            Vector3 nInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            playerRigi.MovePosition(transform.position + nInput * velocity * Time.deltaTime);
+            transform.position -= playerCamera.transform.forward * velocity * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            Vector3 nInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            playerRigi.MovePosition(transform.position + nInput * velocity * Time.deltaTime);
+            transform.position += playerCamera.transform.right * velocity * Time.deltaTime;
         }
     }
 }
