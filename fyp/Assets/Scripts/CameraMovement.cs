@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    private Camera playerCam;
+    private Camera playerCamera;
     private float camX, camY;
     private Vector3 camRotate;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerCam = GetComponent<Camera>();
+        playerCamera = GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
