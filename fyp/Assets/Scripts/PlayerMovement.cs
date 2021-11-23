@@ -4,37 +4,31 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody playerRigi;
     public Camera playerCamera;
     public float velocity = 2f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        playerRigi = GetComponent<Rigidbody>();
-    }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += playerCamera.transform.forward * velocity * Time.deltaTime;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position -= playerCamera.transform.right * velocity * Time.deltaTime;
+            Debug.Log(playerCamera.transform.forward);
+            transform.position += Vector3.Normalize(new Vector3(playerCamera.transform.forward.x, 0, playerCamera.transform.forward.z)) * velocity * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position -= playerCamera.transform.forward * velocity * Time.deltaTime;
+            transform.position -= Vector3.Normalize(new Vector3(playerCamera.transform.forward.x, 0, playerCamera.transform.forward.z)) * velocity * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += playerCamera.transform.right * velocity * Time.deltaTime;
+            transform.position += Vector3.Normalize(new Vector3(playerCamera.transform.right.x, 0, playerCamera.transform.right.z)) * velocity * Time.deltaTime;
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.position -= Vector3.Normalize(new Vector3(playerCamera.transform.right.x, 0, playerCamera.transform.right.z)) * velocity * Time.deltaTime;
         }
     }
 }

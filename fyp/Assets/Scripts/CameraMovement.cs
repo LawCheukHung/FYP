@@ -20,9 +20,9 @@ public class CameraMovement : MonoBehaviour
     {
         camX = Screen.width / 2 + Input.GetAxis("Mouse X") * 10;
         camY = Screen.height / 2 + Input.GetAxis("Mouse Y") * 10;
-        camRotate = new Vector3(camX, camY, playerCam.nearClipPlane);
+        camRotate = new Vector3(camX, camY, playerCamera.nearClipPlane);
 
         if(Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
-            transform.LookAt(playerCam.ScreenToWorldPoint(camRotate), Vector3.up);
+            transform.LookAt(playerCamera.ScreenToWorldPoint(camRotate), Vector3.up);
     }
 }
