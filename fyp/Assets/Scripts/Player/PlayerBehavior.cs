@@ -15,54 +15,51 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switchMode();
+        switchState();
 
-        if(teacherState == TeacherState.Catch)
+        switch (teacherState)
         {
-            catchStudent();
+            case TeacherState.Catch:
+                catchStudent();
+                break;
+            case TeacherState.Teach:
+                teachStudent();
+                break;
+            default:
+                break;
         }
     }
 
-    private void switchMode()
+    private void switchState()
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            teachMode();
+            if (teacherState == TeacherState.Teach)
+            {
+                initializeTeacherState();
+            }
+            else
+            {
+                initializeTeacherState();
+                teachingBook.SetActive(true);
+                teacherState = TeacherState.Teach;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            catchMode();
+            if (teacherState == TeacherState.Catch)
+            {
+                initializeTeacherState();
+            }
+            else
+            {
+                initializeTeacherState();
+                teacherState = TeacherState.Catch;
+            }
         }
     }
 
-    private void teachMode()
-    {
-        if (teacherState == TeacherState.Teach)
-        {
-            idleMode();
-        }
-        else
-        {
-            idleMode();
-            teachingBook.SetActive(true);
-            teacherState = TeacherState.Teach;
-        }
-    }
-
-    private void catchMode()
-    {
-        if (teacherState == TeacherState.Catch)
-        {
-            idleMode();
-        }
-        else
-        {
-            idleMode();
-            teacherState = TeacherState.Catch;
-        }
-    }
-
-    private void idleMode()
+    private void initializeTeacherState()
     {
         teachingBook.SetActive(false);
         teacherState = TeacherState.Idle;
@@ -72,7 +69,15 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("fuck");
+            Debug.Log("catch");
+        }
+    }
+
+    private void teachStudent()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("teach");
         }
     }
 }
