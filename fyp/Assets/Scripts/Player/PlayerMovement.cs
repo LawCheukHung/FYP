@@ -6,8 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody playerRigi;
     public Camera playerCamera;
-    public float velocity = 2f;
-    public float jumpHeight = 5f;
+    public float moveVelocity = 2f;
+    public float jumpMulitply = 5f;
 
     void Start()
     {
@@ -19,27 +19,27 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += Vector3.Normalize(new Vector3(playerCamera.transform.forward.x, 0, playerCamera.transform.forward.z)) * velocity * Time.deltaTime;
+            transform.position += Vector3.Normalize(new Vector3(playerCamera.transform.forward.x, 0, playerCamera.transform.forward.z)) * moveVelocity * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position -= Vector3.Normalize(new Vector3(playerCamera.transform.forward.x, 0, playerCamera.transform.forward.z)) * velocity * Time.deltaTime;
+            transform.position -= Vector3.Normalize(new Vector3(playerCamera.transform.forward.x, 0, playerCamera.transform.forward.z)) * moveVelocity * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += Vector3.Normalize(new Vector3(playerCamera.transform.right.x, 0, playerCamera.transform.right.z)) * velocity * Time.deltaTime;
+            transform.position += Vector3.Normalize(new Vector3(playerCamera.transform.right.x, 0, playerCamera.transform.right.z)) * moveVelocity * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position -= Vector3.Normalize(new Vector3(playerCamera.transform.right.x, 0, playerCamera.transform.right.z)) * velocity * Time.deltaTime;
+            transform.position -= Vector3.Normalize(new Vector3(playerCamera.transform.right.x, 0, playerCamera.transform.right.z)) * moveVelocity * Time.deltaTime;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && playerRigi.velocity.y == 0)
         {
-            playerRigi.velocity = transform.up * jumpHeight;
+            playerRigi.velocity = transform.up * jumpMulitply;
         }
     }
 }

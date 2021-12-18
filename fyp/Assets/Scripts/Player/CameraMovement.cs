@@ -5,8 +5,9 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     private Camera playerCamera;
-    private float camX, camY;
     private Vector3 camRotate;
+    private float camX, camY;
+    private float cameraSensitivity = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +19,8 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        camX = Screen.width / 2 + Input.GetAxis("Mouse X") * 10;
-        camY = Screen.height / 2 + Input.GetAxis("Mouse Y") * 10;
+        camX = Screen.width / 2 + Input.GetAxis("Mouse X") * cameraSensitivity;
+        camY = Screen.height / 2 + Input.GetAxis("Mouse Y") * cameraSensitivity;
         camRotate = new Vector3(camX, camY, playerCamera.nearClipPlane);
 
         if(Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
