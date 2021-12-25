@@ -25,6 +25,9 @@ public class PlayerBehavior : MonoBehaviour
             case TeacherState.Teach:
                 teachStudent();
                 break;
+            case TeacherState.Idle:
+                collectGarbage();
+                break;
             default:
                 break;
         }
@@ -78,6 +81,14 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("teach");
+        }
+    }
+
+    private void collectGarbage()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("collect");
         }
     }
 }
