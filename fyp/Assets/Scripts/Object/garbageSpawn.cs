@@ -43,6 +43,6 @@ public class garbageSpawn : MonoBehaviour
 
     private void randomPosition()
     {
-        garbagePosition = new Vector3(Random.Range(-5, 5), 1, Random.Range(-5, 5));
+        garbagePosition = new Vector3(Random.Range(-3, 3), 1, Random.Range(-6, -3));
     }
 }
