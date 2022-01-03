@@ -1,11 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerBehavior : MonoBehaviour
 {
     public GameObject teachingBook;
+    public Camera playerCam;
+
+    private GameObject currentGarbage;
     private TeacherState teacherState;
+    private GameObject pickUpObject;
+    private float aimingDistance = 1f;
+    private float aimingRadius = 0.1f;
+    private bool isHoldingGarbage = false;
 
     void Start()
     {
@@ -89,6 +97,36 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("collect");
+            shootRaycast();
         }
+    }
+
+    private void shootRaycast()
+    {
+        RaycastHit hit;
+
+        if (Physics.SphereCast(playerCam.transform.position, aimingRadius, playerCam.transform.forward, out hit, aimingDistance))
+        {
+            if(!isHoldingGarbage && hit.collider.tag == "Garbage")
+            {
+                currentGarbage = hit.transform.gameObject;
+                pickUpGarbage();
+            }
+        }
+    }
+
+    private void pickUpGarbage()
+    {
+        Debug.Log("picked up a garbage");
+        isHoldingGarbage = true;
+        currentGarbage.GetComponent<objectDropDown>().setFreeState();
+        currentGarbage.transform.SetParent(playerCam.transform);
+    }
+
+    //for test raycast
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(playerCam.transform.position + playerCam.transform.forward * aimingDistance, aimingRadius);
     }
 }

@@ -4,26 +4,30 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    private Camera playerCamera;
-    private Vector3 camRotate;
-    private float camX, camY;
-    private float cameraSensitivity = 10f;
+    public Transform playerBody;
 
-    // Start is called before the first frame update
+    //private Vector3 camRotate;
+    private float xRotation = 0f;
+    private float mouseX, mouseY;
+    private float mouseSensitivity = 200f;
+
     void Start()
     {
-        playerCamera = GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        camX = Screen.width / 2 + Input.GetAxis("Mouse X") * cameraSensitivity;
-        camY = Screen.height / 2 + Input.GetAxis("Mouse Y") * cameraSensitivity;
-        camRotate = new Vector3(camX, camY, playerCamera.nearClipPlane);
+        mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        if(Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
-            transform.LookAt(playerCamera.ScreenToWorldPoint(camRotate), Vector3.up);
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        playerBody.Rotate(Vector3.up * mouseX);
+
+        //camRotate = new Vector3(camX, camY, Camera.main.nearClipPlane);
+        //transform.LookAt(Camera.main.ScreenToWorldPoint(camRotate), Vector3.up);
     }
 }
