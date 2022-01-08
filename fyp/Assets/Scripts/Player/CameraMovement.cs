@@ -5,8 +5,6 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public Transform playerBody;
-
-    //private Vector3 camRotate;
     private float xRotation = 0f;
     private float mouseX, mouseY;
     private float mouseSensitivity = 200f;
@@ -26,8 +24,5 @@ public class CameraMovement : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
-
-        //camRotate = new Vector3(camX, camY, Camera.main.nearClipPlane);
-        //transform.LookAt(Camera.main.ScreenToWorldPoint(camRotate), Vector3.up);
     }
 }
