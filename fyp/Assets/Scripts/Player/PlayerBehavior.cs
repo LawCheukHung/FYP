@@ -9,6 +9,7 @@ public class PlayerBehavior : MonoBehaviour
     public Camera playerCam;
 
     private GameObject currentGrabingObject;
+    private objectCollision grabbingObjectState;
     private TeacherState teacherState;
     private float aimingDistance = 1f;
     private float aimingRadius = 0.1f;
@@ -73,6 +74,7 @@ public class PlayerBehavior : MonoBehaviour
     private void initializeTeacherState()
     {
         teacherState = TeacherState.Idle;
+        dropObject();
     }
 
     private void catchStudent()
@@ -93,15 +95,15 @@ public class PlayerBehavior : MonoBehaviour
 
     private void collectGarbage()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isHoldingObject)
         {
             Debug.Log("collect mode (pick)");
             shootRaycast();
         }
-        else if ((Input.GetMouseButtonDown(1)) && !(currentGrabingObject == null))
+        else if (Input.GetMouseButtonDown(1) && isHoldingObject)
         {
-            Debug.Log("collect mode (release)");
-            controlObject();
+            Debug.Log("collect mode (drop)");
+            dropObject();
         }
     }
 
@@ -109,34 +111,38 @@ public class PlayerBehavior : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (!isHoldingObject)
+        if (Physics.SphereCast(playerCam.transform.position, aimingRadius, playerCam.transform.forward, out hit, aimingDistance))
         {
-            if (Physics.SphereCast(playerCam.transform.position, aimingRadius, playerCam.transform.forward, out hit, aimingDistance))
+            if (hit.collider.tag == "Garbage")
             {
-                if (hit.collider.tag == "Garbage")
-                {
-                    currentGrabingObject = hit.transform.gameObject;
-                    controlObject();
-                }
+                currentGrabingObject = hit.transform.gameObject;
+                grabbingObjectState = currentGrabingObject.GetComponent<objectCollision>();
+                grabObject();
             }
         }
     }
 
-    private void controlObject()
+    private void grabObject()
     {
-        Debug.Log("control an object");
+        Debug.Log("grab an object");
 
-        if (!isHoldingObject)
-        {
-            currentGrabingObject.transform.SetParent(playerCam.transform);
-            isHoldingObject = true;
-        }
-        else
-        {
-            currentGrabingObject.transform.SetParent(null);
-            currentGrabingObject = null;
-            isHoldingObject = false;
-        }
+        currentGrabingObject.transform.SetParent(playerCam.transform);
+        grabbingObjectState.setIsHolding(true);
+        isHoldingObject = true;
+    }
+
+    private void dropObject()
+    {
+        Debug.Log("drop an object");
+
+        currentGrabingObject.transform.SetParent(null);
+        grabbingObjectState.setIsHolding(false);
+        isHoldingObject = false;
+    }
+
+    public void ObjectFall()
+    {
+        dropObject();
     }
 
     //for test raycast
