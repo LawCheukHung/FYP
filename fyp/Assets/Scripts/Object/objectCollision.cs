@@ -6,7 +6,6 @@ public class objectCollision : MonoBehaviour
 {
     private PlayerBehavior player;
     private bool isHolding = false;
-    private float collidingTime = 0.5f;
 
     private void Start()
     {

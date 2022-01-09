@@ -1,4 +1,4 @@
-﻿enum StudentState
+﻿public enum StudentState
 {
     Sleep,
     Play,

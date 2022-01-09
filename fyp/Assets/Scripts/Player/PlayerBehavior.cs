@@ -9,7 +9,9 @@ public class PlayerBehavior : MonoBehaviour
     public Camera playerCam;
 
     private GameObject currentGrabingObject;
+    private GameObject currentCatchingStudent;
     private objectCollision grabbingObjectState;
+    private StudentBehavior catchingStudentState;
     private TeacherState teacherState;
     private float aimingDistance = 1f;
     private float aimingRadius = 0.1f;
@@ -34,7 +36,7 @@ public class PlayerBehavior : MonoBehaviour
                 teachStudent();
                 break;
             case TeacherState.Idle:
-                collectGarbage();
+                collectObject();
                 break;
             default:
                 break;
@@ -82,6 +84,7 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("catch mode");
+            shootRaycast();
         }
     }
 
@@ -93,7 +96,7 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-    private void collectGarbage()
+    private void collectObject()
     {
         if (Input.GetMouseButtonDown(0) && !isHoldingObject)
         {
@@ -119,6 +122,13 @@ public class PlayerBehavior : MonoBehaviour
                 grabbingObjectState = currentGrabingObject.GetComponent<objectCollision>();
                 grabObject();
             }
+
+            if (hit.collider.tag == "Student")
+            {
+                currentCatchingStudent = hit.transform.gameObject;
+                catchingStudentState = currentCatchingStudent.GetComponent<StudentBehavior>();
+                catchTargetStudent();
+            }
         }
     }
 
@@ -140,9 +150,16 @@ public class PlayerBehavior : MonoBehaviour
         isHoldingObject = false;
     }
 
+    //when the grabbing object has collide with other gameObject, 
+    //the objectCollision script will call this function to drop the current grabbing object.
     public void ObjectFall()
     {
         dropObject();
+    }
+
+    private void catchTargetStudent()
+    {
+
     }
 
     //for test raycast
