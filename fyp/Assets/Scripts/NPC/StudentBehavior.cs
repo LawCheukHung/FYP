@@ -12,18 +12,27 @@ public class StudentBehavior : MonoBehaviour
     void Start()
     {
         studentState = StudentState.Nice;
-        badValue = Random.Range(0.01f, 0.1f);
+        badValue = Random.Range(0.1f, 1f);
         mentalValue = 100f;
     }
 
     void Update()
     {
-        changeActionState();
-
-        if (studentState != StudentState.Nice)
+        if(mentalValue <= 0)
         {
-            isBadBad = true;
+            changeActionState();
         }
+        else
+        {
+            countDownMentalValue();
+        }
+    }
+
+    public void initialiseStudentState()
+    {
+        studentState = StudentState.Nice;
+        isBadBad = false;
+        mentalValue = 100f;
     }
 
     private void countDownMentalValue()
@@ -33,16 +42,17 @@ public class StudentBehavior : MonoBehaviour
 
     private void changeActionState()
     {
-        countDownMentalValue();
-
-        if (mentalValue <= 0)
-        {
-            studentState = (StudentState)((int)Random.Range(0,3));
-        }
+        studentState = (StudentState)((int)Random.Range(0, 3));
+        isBadBad = true;
     }
 
     public bool getIsBadBad()
     {
         return isBadBad;
+    }
+
+    public float getMentalValue()
+    {
+        return mentalValue;
     }
 }

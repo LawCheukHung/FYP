@@ -16,9 +16,11 @@ public class PlayerBehavior : MonoBehaviour
     private float aimingDistance = 1f;
     private float aimingRadius = 0.1f;
     private bool isHoldingObject = false;
+    private int totalCaughtStudent = 0;
 
     void Start()
     {
+        Debug.Log(totalCaughtStudent);
         teacherState = TeacherState.Idle;
     }
 
@@ -98,14 +100,12 @@ public class PlayerBehavior : MonoBehaviour
 
     private void collectObject()
     {
-        if (Input.GetMouseButtonDown(0) && !isHoldingObject)
+        if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("collect mode (pick)");
             shootRaycast();
         }
-        else if (Input.GetMouseButtonDown(1) && isHoldingObject)
+        else if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("collect mode (drop)");
             dropObject();
         }
     }
@@ -116,14 +116,14 @@ public class PlayerBehavior : MonoBehaviour
 
         if (Physics.SphereCast(playerCam.transform.position, aimingRadius, playerCam.transform.forward, out hit, aimingDistance))
         {
-            if (hit.collider.tag == "Garbage")
+            if (hit.collider.tag == "Garbage" && teacherState == TeacherState.Idle)
             {
                 currentGrabingObject = hit.transform.gameObject;
                 grabbingObjectState = currentGrabingObject.GetComponent<objectCollision>();
                 grabObject();
             }
 
-            if (hit.collider.tag == "Student")
+            if (hit.collider.tag == "Student" && teacherState == TeacherState.Catch)
             {
                 currentCatchingStudent = hit.transform.gameObject;
                 catchingStudentState = currentCatchingStudent.GetComponent<StudentBehavior>();
@@ -134,20 +134,24 @@ public class PlayerBehavior : MonoBehaviour
 
     private void grabObject()
     {
-        Debug.Log("grab an object");
-
-        currentGrabingObject.transform.SetParent(playerCam.transform);
-        grabbingObjectState.setIsHolding(true);
-        isHoldingObject = true;
+        if (!isHoldingObject)
+        {
+            Debug.Log("grab an object");
+            currentGrabingObject.transform.SetParent(playerCam.transform);
+            grabbingObjectState.setIsHolding(true);
+            isHoldingObject = true;
+        }
     }
 
     private void dropObject()
     {
-        Debug.Log("drop an object");
-
-        currentGrabingObject.transform.SetParent(null);
-        grabbingObjectState.setIsHolding(false);
-        isHoldingObject = false;
+        if (isHoldingObject)
+        {
+            Debug.Log("drop an object");
+            currentGrabingObject.transform.SetParent(null);
+            grabbingObjectState.setIsHolding(false);
+            isHoldingObject = false;
+        }
     }
 
     //when the grabbing object has collide with other gameObject, 
@@ -159,7 +163,12 @@ public class PlayerBehavior : MonoBehaviour
 
     private void catchTargetStudent()
     {
-
+        if (catchingStudentState.getIsBadBad())
+        {
+            catchingStudentState.initialiseStudentState();
+            totalCaughtStudent++;
+            Debug.Log(totalCaughtStudent);
+        }
     }
 
     //for test raycast

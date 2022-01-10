@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class StudentSpawn : MonoBehaviour
 {
-    public GameObject student;
+    private GameObject student;
+    public GameObject studentPrefab;
     public GameObject[] FirstseatPos;
     public GameObject[] SecondseatPos;
     public GameObject[] ThirdseatPos;
 
-    void Start()
+    void Awake()
     {
         for (int i = 0; i < FirstseatPos.Length; i++)
-            Instantiate(student, FirstseatPos[i].transform.position, Quaternion.identity);
+        {
+            student = Instantiate(studentPrefab, FirstseatPos[i].transform.position, Quaternion.identity);
+            student.name = "Student" + i;
+        }
+            
 
         for (int i = 0; i < SecondseatPos.Length; i++)
-            Instantiate(student, SecondseatPos[i].transform.position, Quaternion.identity);
+        {
+            student = Instantiate(studentPrefab, SecondseatPos[i].transform.position, Quaternion.identity);
+            student.name = "Student" + (5 + i);
+        }
 
         for (int i = 0; i < ThirdseatPos.Length; i++)
-            Instantiate(student, ThirdseatPos[i].transform.position, Quaternion.identity);
+        {
+            student = Instantiate(studentPrefab, ThirdseatPos[i].transform.position, Quaternion.identity);
+            student.name = "Student" + (10 + i);
+        }
     }
 }

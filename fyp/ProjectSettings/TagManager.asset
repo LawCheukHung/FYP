@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Garbage
   - Ground
+  - Student
   layers:
   - Default
   - TransparentFX
