@@ -5,21 +5,18 @@ using UnityEngine.UI;
 
 public class showStatus : MonoBehaviour
 {
-    private StudentBehavior studentStatus;
-    public Text[] currentTextInfo;
-    public Transform playerCamera;
+    public StudentBehavior studentStatus;
+    public Text currentTextInfo;
+    private Transform playerCamera;
 
     void Start()
     {
-        for (int i = 0; i < currentTextInfo.Length; i++)
-        {
-            studentStatus = GameObject.Find("Student" + i).GetComponent<StudentBehavior>();
-        }
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
     }
 
     void Update()
     {
-        currentTextInfo[0].text = "Mental Value: " + (int)studentStatus.getMentalValue();
+        currentTextInfo.text = "Mental Value: " + (int)studentStatus.getMentalValue();
         transform.LookAt(transform.position + playerCamera.forward);
     }
 }
