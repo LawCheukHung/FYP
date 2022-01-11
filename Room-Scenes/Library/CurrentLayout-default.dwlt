@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 70
+  controlID: 63
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 94
+  controlID: 68
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 95
+  controlID: 69
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -344,14 +344,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Scenes
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: F:\GitHub\VR\FYP
+  m_LastProjectPath: F:\GitHub\FYP\Room-Scenes
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 24}
-    m_SelectedIDs: fa360000
-    m_LastClickedID: 14074
-    m_ExpandedIDs: 00000000de360000e0360000e2360000e4360000e6360000ea360000fc3600000837000000ca9a3b
+    m_SelectedIDs: 864f0000
+    m_LastClickedID: 20358
+    m_ExpandedIDs: 00000000684f00006a4f00006c4f00006e4f0000704f0000724f0000744f0000764f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -379,7 +379,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000de360000e0360000e2360000e4360000e6360000e8360000ea360000
+    m_ExpandedIDs: 00000000684f00006a4f00006c4f00006e4f0000704f0000724f0000744f0000764f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -502,9 +502,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 0c380000
+      m_SelectedIDs: 9a4f0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 3a0dffff6413fffffa1fffffa270ffff58b9ffff9cd4ffff3ad7ffff0ef8ffff16f9ffff68fbffff8a3b000014740000e8740000ec740000
+      m_ExpandedIDs: 3e74ffff0476ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -564,9 +564,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.056346036, y: 0.056550138, z: -0.1251097}
+    m_Target: {x: 0.035469085, y: 0.057871997, z: -0.1840496}
     speed: 2
-    m_Value: {x: 0.056346036, y: 0.056550138, z: -0.1251097}
+    m_Value: {x: 0.035469085, y: 0.057871997, z: -0.1840496}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -612,9 +612,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.050535567, y: 0.4865775, z: -0.028194046, w: -0.8717373}
+    m_Target: {x: -0.040008903, y: 0.6611501, z: -0.03533002, w: -0.7483755}
     speed: 2
-    m_Value: {x: -0.05057698, y: 0.4852615, z: -0.028117754, w: -0.8724521}
+    m_Value: {x: -0.040061172, y: 0.6600155, z: -0.03526937, w: -0.7493536}
   m_Size:
     m_Target: 0.07389336
     speed: 2
