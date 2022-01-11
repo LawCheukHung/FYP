@@ -78,6 +78,7 @@ public class PlayerBehavior : MonoBehaviour
     private void initializeTeacherState()
     {
         teacherState = TeacherState.Idle;
+        teachingBook.SetActive(false);
         dropObject();
     }
 
