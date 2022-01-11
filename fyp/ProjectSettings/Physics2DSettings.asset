@@ -43,7 +43,11 @@ Physics2DSettings:
   m_QueriesStartInColliders: 1
   m_CallbacksOnDisable: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_ReuseCollisionCallbacks: 0
+=======
+  m_ReuseCollisionCallbacks: 1
+>>>>>>> parent of 36fb1be (updates)
 =======
   m_ReuseCollisionCallbacks: 1
 >>>>>>> parent of 36fb1be (updates)

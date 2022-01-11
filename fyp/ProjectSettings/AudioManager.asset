@@ -13,7 +13,10 @@ AudioManager:
   m_VirtualVoiceCount: 512
   m_RealVoiceCount: 32
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_EnableOutputSuspension: 1
+=======
+>>>>>>> parent of 36fb1be (updates)
 =======
 >>>>>>> parent of 36fb1be (updates)
   m_SpatializerPlugin: 
@@ -21,7 +24,11 @@ AudioManager:
   m_DisableAudio: 0
   m_VirtualizeEffects: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_RequestedDSPBufferSize: 0
+=======
+  m_RequestedDSPBufferSize: 1024
+>>>>>>> parent of 36fb1be (updates)
 =======
   m_RequestedDSPBufferSize: 1024
 >>>>>>> parent of 36fb1be (updates)

@@ -19,7 +19,11 @@ QualitySettings:
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     skinWeights: 1
+=======
+    blendWeights: 1
+>>>>>>> parent of 36fb1be (updates)
 =======
     blendWeights: 1
 >>>>>>> parent of 36fb1be (updates)
@@ -45,7 +49,10 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     customRenderPipeline: {fileID: 0}
+=======
+>>>>>>> parent of 36fb1be (updates)
 =======
 >>>>>>> parent of 36fb1be (updates)
     excludedTargetPlatforms: []
@@ -62,7 +69,11 @@ QualitySettings:
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     skinWeights: 2
+=======
+    blendWeights: 2
+>>>>>>> parent of 36fb1be (updates)
 =======
     blendWeights: 2
 >>>>>>> parent of 36fb1be (updates)
@@ -88,7 +99,10 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     customRenderPipeline: {fileID: 0}
+=======
+>>>>>>> parent of 36fb1be (updates)
 =======
 >>>>>>> parent of 36fb1be (updates)
     excludedTargetPlatforms: []
@@ -105,7 +119,11 @@ QualitySettings:
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     skinWeights: 2
+=======
+    blendWeights: 2
+>>>>>>> parent of 36fb1be (updates)
 =======
     blendWeights: 2
 >>>>>>> parent of 36fb1be (updates)
@@ -131,7 +149,10 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     customRenderPipeline: {fileID: 0}
+=======
+>>>>>>> parent of 36fb1be (updates)
 =======
 >>>>>>> parent of 36fb1be (updates)
     excludedTargetPlatforms: []
@@ -148,7 +169,11 @@ QualitySettings:
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     skinWeights: 2
+=======
+    blendWeights: 2
+>>>>>>> parent of 36fb1be (updates)
 =======
     blendWeights: 2
 >>>>>>> parent of 36fb1be (updates)
@@ -174,7 +199,10 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     customRenderPipeline: {fileID: 0}
+=======
+>>>>>>> parent of 36fb1be (updates)
 =======
 >>>>>>> parent of 36fb1be (updates)
     excludedTargetPlatforms: []
@@ -191,7 +219,11 @@ QualitySettings:
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     skinWeights: 4
+=======
+    blendWeights: 4
+>>>>>>> parent of 36fb1be (updates)
 =======
     blendWeights: 4
 >>>>>>> parent of 36fb1be (updates)
@@ -217,7 +249,10 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     customRenderPipeline: {fileID: 0}
+=======
+>>>>>>> parent of 36fb1be (updates)
 =======
 >>>>>>> parent of 36fb1be (updates)
     excludedTargetPlatforms: []
@@ -234,7 +269,11 @@ QualitySettings:
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     skinWeights: 255
+=======
+    blendWeights: 4
+>>>>>>> parent of 36fb1be (updates)
 =======
     blendWeights: 4
 >>>>>>> parent of 36fb1be (updates)
@@ -260,6 +299,7 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
     customRenderPipeline: {fileID: 0}
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
@@ -270,6 +310,8 @@ QualitySettings:
     PS4: 5
     PS5: 5
 =======
+=======
+>>>>>>> parent of 36fb1be (updates)
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
     Android: 2
@@ -278,6 +320,9 @@ QualitySettings:
     Nintendo Switch: 5
     PS4: 5
     PSP2: 2
+<<<<<<< HEAD
+>>>>>>> parent of 36fb1be (updates)
+=======
 >>>>>>> parent of 36fb1be (updates)
     Stadia: 5
     Standalone: 5

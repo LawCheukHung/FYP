@@ -1,13 +1,19 @@
 {
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 36fb1be (updates)
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
       "source": "builtin",
       "dependencies": {}
     },
+<<<<<<< HEAD
+>>>>>>> parent of 36fb1be (updates)
+=======
 >>>>>>> parent of 36fb1be (updates)
     "com.unity.collab-proxy": {
       "version": "1.2.16",

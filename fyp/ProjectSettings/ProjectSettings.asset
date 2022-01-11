@@ -5,7 +5,11 @@ PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 20
 <<<<<<< HEAD
+<<<<<<< HEAD
   productGUID: e47e2925c2b3fdd48ad65d49c16147d7
+=======
+  productGUID: fa17c60c36009e745b5fc4250b6b43b8
+>>>>>>> parent of 36fb1be (updates)
 =======
   productGUID: fa17c60c36009e745b5fc4250b6b43b8
 >>>>>>> parent of 36fb1be (updates)
@@ -73,7 +77,11 @@ PlayerSettings:
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
   runInBackground: 0
+=======
+  runInBackground: 1
+>>>>>>> parent of 36fb1be (updates)
 =======
   runInBackground: 1
 >>>>>>> parent of 36fb1be (updates)
@@ -92,7 +100,11 @@ PlayerSettings:
   useMacAppStoreValidation: 0
   macAppStoreCategory: public.app-category.games
 <<<<<<< HEAD
+<<<<<<< HEAD
   gpuSkinning: 0
+=======
+  gpuSkinning: 1
+>>>>>>> parent of 36fb1be (updates)
 =======
   gpuSkinning: 1
 >>>>>>> parent of 36fb1be (updates)
@@ -118,7 +130,11 @@ PlayerSettings:
   xboxOneEnableTypeOptimization: 0
   xboxOnePresentImmediateThreshold: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   switchQueueCommandMemory: 1048576
+=======
+  switchQueueCommandMemory: 0
+>>>>>>> parent of 36fb1be (updates)
 =======
   switchQueueCommandMemory: 0
 >>>>>>> parent of 36fb1be (updates)
@@ -141,7 +157,11 @@ PlayerSettings:
     16:9: 1
     Others: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
   bundleVersion: 1.0
+=======
+  bundleVersion: 0.1
+>>>>>>> parent of 36fb1be (updates)
 =======
   bundleVersion: 0.1
 >>>>>>> parent of 36fb1be (updates)
@@ -184,7 +204,11 @@ PlayerSettings:
   D3DHDRBitDepth: 0
   m_ColorGamuts: 00000000
 <<<<<<< HEAD
+<<<<<<< HEAD
   targetPixelDensity: 0
+=======
+  targetPixelDensity: 30
+>>>>>>> parent of 36fb1be (updates)
 =======
   targetPixelDensity: 30
 >>>>>>> parent of 36fb1be (updates)
@@ -207,6 +231,7 @@ PlayerSettings:
   APKExpansionFiles: 0
   keepLoadedShadersAlive: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   StripUnusedMeshComponents: 0
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988
@@ -215,6 +240,8 @@ PlayerSettings:
   tvOSRequireExtendedGameController: 0
   tvOSTargetOSVersionString: 
 =======
+=======
+>>>>>>> parent of 36fb1be (updates)
   StripUnusedMeshComponents: 1
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988
@@ -222,6 +249,9 @@ PlayerSettings:
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
   tvOSTargetOSVersionString: 10.0
+<<<<<<< HEAD
+>>>>>>> parent of 36fb1be (updates)
+=======
 >>>>>>> parent of 36fb1be (updates)
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
@@ -276,9 +306,15 @@ PlayerSettings:
   iOSAutomaticallyDetectAndAddCapabilities: 1
   appleEnableProMotion: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   clonedFromGUID: 00000000000000000000000000000000
   templatePackageId: 
   templateDefaultScene: 
+=======
+  clonedFromGUID: c0afd0d1d80e3634a9dac47e8a0426ea
+  templatePackageId: com.unity.template.3d@4.2.8
+  templateDefaultScene: Assets/Scenes/SampleScene.unity
+>>>>>>> parent of 36fb1be (updates)
 =======
   clonedFromGUID: c0afd0d1d80e3634a9dac47e8a0426ea
   templatePackageId: com.unity.template.3d@4.2.8
@@ -306,12 +342,15 @@ PlayerSettings:
   m_BuildTargetIcons: []
   m_BuildTargetPlatformIcons: []
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsJobs: []
   m_BuildTargetGraphicsJobMode: []
   m_BuildTargetGraphicsAPIs: []
   m_BuildTargetVRSettings: []
 =======
+=======
+>>>>>>> parent of 36fb1be (updates)
   m_BuildTargetBatching:
   - m_BuildTarget: Standalone
     m_StaticBatching: 1
@@ -379,6 +418,9 @@ PlayerSettings:
     m_Devices:
     - Oculus
     - OpenVR
+<<<<<<< HEAD
+>>>>>>> parent of 36fb1be (updates)
+=======
 >>>>>>> parent of 36fb1be (updates)
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
@@ -565,7 +607,11 @@ PlayerSettings:
   ps4RemotePlayKeyMappingDir: 
   ps4PlayTogetherPlayerCount: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   ps4EnterButtonAssignment: 2
+=======
+  ps4EnterButtonAssignment: 1
+>>>>>>> parent of 36fb1be (updates)
 =======
   ps4EnterButtonAssignment: 1
 >>>>>>> parent of 36fb1be (updates)
@@ -592,7 +638,11 @@ PlayerSettings:
   ps4UseLowGarlicFragmentationMode: 1
   ps4SocialScreenEnabled: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   ps4ScriptOptimizationLevel: 2
+=======
+  ps4ScriptOptimizationLevel: 0
+>>>>>>> parent of 36fb1be (updates)
 =======
   ps4ScriptOptimizationLevel: 0
 >>>>>>> parent of 36fb1be (updates)
@@ -630,7 +680,11 @@ PlayerSettings:
   ps5ShareOverlayImagePath: 
   ps5NPConfigZipPath: 
 <<<<<<< HEAD
+<<<<<<< HEAD
   ps5Passcode: F69AzBlax3CF3EDNhm3soLBPh71Yexui
+=======
+  ps5Passcode: frAQBc8Wsa1xVPfvJcrgRYwTiizs2trQ
+>>>>>>> parent of 36fb1be (updates)
 =======
   ps5Passcode: frAQBc8Wsa1xVPfvJcrgRYwTiizs2trQ
 >>>>>>> parent of 36fb1be (updates)
@@ -650,7 +704,11 @@ PlayerSettings:
   blurSplashScreenBackground: 1
   spritePackerPolicy: 
 <<<<<<< HEAD
+<<<<<<< HEAD
   webGLMemorySize: 32
+=======
+  webGLMemorySize: 16
+>>>>>>> parent of 36fb1be (updates)
 =======
   webGLMemorySize: 16
 >>>>>>> parent of 36fb1be (updates)
@@ -664,7 +722,11 @@ PlayerSettings:
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   webGLCompressionFormat: 0
+=======
+  webGLCompressionFormat: 1
+>>>>>>> parent of 36fb1be (updates)
 =======
   webGLCompressionFormat: 1
 >>>>>>> parent of 36fb1be (updates)
@@ -687,7 +749,11 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
   metroPackageName: fyp
+=======
+  metroPackageName: Template_3D
+>>>>>>> parent of 36fb1be (updates)
 =======
   metroPackageName: Template_3D
 >>>>>>> parent of 36fb1be (updates)
@@ -698,7 +764,11 @@ PlayerSettings:
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
 <<<<<<< HEAD
+<<<<<<< HEAD
   metroApplicationDescription: fyp
+=======
+  metroApplicationDescription: Template_3D
+>>>>>>> parent of 36fb1be (updates)
 =======
   metroApplicationDescription: Template_3D
 >>>>>>> parent of 36fb1be (updates)
@@ -753,7 +823,12 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   cloudServicesEnabled: {}
+=======
+  cloudServicesEnabled:
+    UNet: 1
+>>>>>>> parent of 36fb1be (updates)
 =======
   cloudServicesEnabled:
     UNet: 1

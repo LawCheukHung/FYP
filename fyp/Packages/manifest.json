@@ -1,6 +1,10 @@
 {
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "com.unity.2d.sprite": "1.0.0",
+>>>>>>> parent of 36fb1be (updates)
 =======
     "com.unity.2d.sprite": "1.0.0",
 >>>>>>> parent of 36fb1be (updates)

@@ -21,7 +21,11 @@ public class PlayerBehavior : MonoBehaviour
     void Start()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         Debug.Log("idle mode, caught student number: " + totalCaughtStudent);
+=======
+        Debug.Log(totalCaughtStudent);
+>>>>>>> parent of 36fb1be (updates)
 =======
         Debug.Log(totalCaughtStudent);
 >>>>>>> parent of 36fb1be (updates)
@@ -58,7 +62,10 @@ public class PlayerBehavior : MonoBehaviour
                 teachingBook.SetActive(false);
                 initializeTeacherState();
 <<<<<<< HEAD
+<<<<<<< HEAD
                 Debug.Log("idle mode, caught student number: " + totalCaughtStudent);
+=======
+>>>>>>> parent of 36fb1be (updates)
 =======
 >>>>>>> parent of 36fb1be (updates)
             }
@@ -68,7 +75,10 @@ public class PlayerBehavior : MonoBehaviour
                 teachingBook.SetActive(true);
                 teacherState = TeacherState.Teach;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 Debug.Log("teach mode, caught student number: " + totalCaughtStudent);
+=======
+>>>>>>> parent of 36fb1be (updates)
 =======
 >>>>>>> parent of 36fb1be (updates)
             }
@@ -79,7 +89,10 @@ public class PlayerBehavior : MonoBehaviour
             {
                 initializeTeacherState();
 <<<<<<< HEAD
+<<<<<<< HEAD
                 Debug.Log("idle mode, caught student number: " + totalCaughtStudent);
+=======
+>>>>>>> parent of 36fb1be (updates)
 =======
 >>>>>>> parent of 36fb1be (updates)
             }
@@ -88,7 +101,10 @@ public class PlayerBehavior : MonoBehaviour
                 initializeTeacherState();
                 teacherState = TeacherState.Catch;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 Debug.Log("catch mode, caught student number: " + totalCaughtStudent);
+=======
+>>>>>>> parent of 36fb1be (updates)
 =======
 >>>>>>> parent of 36fb1be (updates)
             }
@@ -107,6 +123,10 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            Debug.Log("catch mode");
+>>>>>>> parent of 36fb1be (updates)
 =======
             Debug.Log("catch mode");
 >>>>>>> parent of 36fb1be (updates)
@@ -119,7 +139,11 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             //teaching behavior
+=======
+            Debug.Log("teach mode");
+>>>>>>> parent of 36fb1be (updates)
 =======
             Debug.Log("teach mode");
 >>>>>>> parent of 36fb1be (updates)

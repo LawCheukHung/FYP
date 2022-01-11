@@ -36,7 +36,11 @@ InputManager:
     invert: 0
     type: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     axis: 0
+=======
+    axis: 1
+>>>>>>> parent of 36fb1be (updates)
 =======
     axis: 1
 >>>>>>> parent of 36fb1be (updates)
