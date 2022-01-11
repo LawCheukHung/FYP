@@ -20,7 +20,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("idle mode, caught student number: " + totalCaughtStudent);
+        Debug.Log(totalCaughtStudent);
         teacherState = TeacherState.Idle;
     }
 
@@ -53,14 +53,12 @@ public class PlayerBehavior : MonoBehaviour
             {
                 teachingBook.SetActive(false);
                 initializeTeacherState();
-                Debug.Log("idle mode, caught student number: " + totalCaughtStudent);
             }
             else
             {
                 initializeTeacherState();
                 teachingBook.SetActive(true);
                 teacherState = TeacherState.Teach;
-                Debug.Log("teach mode, caught student number: " + totalCaughtStudent);
             }
         }
         else if (Input.GetKeyDown(KeyCode.C))
@@ -68,13 +66,11 @@ public class PlayerBehavior : MonoBehaviour
             if (teacherState == TeacherState.Catch)
             {
                 initializeTeacherState();
-                Debug.Log("idle mode, caught student number: " + totalCaughtStudent);
             }
             else
             {
                 initializeTeacherState();
                 teacherState = TeacherState.Catch;
-                Debug.Log("catch mode, caught student number: " + totalCaughtStudent);
             }
         }
     }
@@ -90,6 +86,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("catch mode");
             shootRaycast();
         }
     }
@@ -98,7 +95,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //teaching behavior
+            Debug.Log("teach mode");
         }
     }
 
