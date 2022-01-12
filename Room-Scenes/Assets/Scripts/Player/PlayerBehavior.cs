@@ -17,11 +17,11 @@ public class PlayerBehavior : MonoBehaviour
     private float aimingDistance = 1f;
     private float aimingRadius = 0.1f;
     private bool isHoldingObject = false;
-    private int totalCaughtStudent = 0;
+    //private int totalCaughtStudent = 0;
 
     void Start()
     {
-        Debug.Log(totalCaughtStudent);
+        //Debug.Log(totalCaughtStudent);
         teacherState = TeacherState.Idle;
         Debug.Log("idle mode");
     }
@@ -177,8 +177,9 @@ public class PlayerBehavior : MonoBehaviour
         if (catchingStudentState.getIsBadBad())
         {
             catchingStudentState.initialiseStudentState();
-            totalCaughtStudent++;
-            Debug.Log(totalCaughtStudent);
+            mainMission.changeBadStudentAmount(-1);
+            //totalCaughtStudent++;
+            //Debug.Log(totalCaughtStudent);
         }
     }
 

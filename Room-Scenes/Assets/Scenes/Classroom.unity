@@ -10037,7 +10037,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Time's Up
+  m_Text: Game Set
 --- !u!222 &1812617321
 CanvasRenderer:
   m_ObjectHideFlags: 0
