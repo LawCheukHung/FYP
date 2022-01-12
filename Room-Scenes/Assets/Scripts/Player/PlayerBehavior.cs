@@ -7,6 +7,7 @@ public class PlayerBehavior : MonoBehaviour
 {
     public GameObject teachingBook;
     public Camera playerCam;
+    public MainMission mainMission;
 
     private GameObject currentGrabingObject;
     private GameObject currentCatchingStudent;
@@ -22,6 +23,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         Debug.Log(totalCaughtStudent);
         teacherState = TeacherState.Idle;
+        Debug.Log("idle mode");
     }
 
     // Update is called once per frame
@@ -53,12 +55,14 @@ public class PlayerBehavior : MonoBehaviour
             {
                 teachingBook.SetActive(false);
                 initializeTeacherState();
+                Debug.Log("idle mode");
             }
             else
             {
                 initializeTeacherState();
                 teachingBook.SetActive(true);
                 teacherState = TeacherState.Teach;
+                Debug.Log("teach mode");
             }
         }
         else if (Input.GetKeyDown(KeyCode.C))
@@ -66,11 +70,13 @@ public class PlayerBehavior : MonoBehaviour
             if (teacherState == TeacherState.Catch)
             {
                 initializeTeacherState();
+                Debug.Log("idle mode");
             }
             else
             {
                 initializeTeacherState();
                 teacherState = TeacherState.Catch;
+                Debug.Log("catch mode");
             }
         }
     }
@@ -79,6 +85,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         teacherState = TeacherState.Idle;
         teachingBook.SetActive(false);
+        mainMission.setIsTeaching(false);
         dropObject();
     }
 
@@ -86,16 +93,19 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("catch mode");
             shootRaycast();
         }
     }
 
     private void teachStudent()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            Debug.Log("teach mode");
+            mainMission.setIsTeaching(true);
+        }
+        else
+        {
+            mainMission.setIsTeaching(false);
         }
     }
 

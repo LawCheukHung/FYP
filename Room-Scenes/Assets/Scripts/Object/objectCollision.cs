@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class objectCollision : MonoBehaviour
 {
+    private SideMission sideMission;
     private PlayerBehavior player;
     private bool isHolding = false;
 
     private void Start()
     {
+        sideMission = GameObject.FindGameObjectWithTag("Mission").GetComponent<SideMission>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>();
     }
 
@@ -17,6 +19,12 @@ public class objectCollision : MonoBehaviour
         if (isHolding)
         {
             player.ObjectFall();
+        }
+
+        if (collision.gameObject.CompareTag("GarbageBin"))
+        {
+            sideMission.countCollectGarbage();
+            gameObject.SetActive(false);
         }
     }
 
