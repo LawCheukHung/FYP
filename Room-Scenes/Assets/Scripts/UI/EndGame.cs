@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -25,10 +26,21 @@ public class EndGame : MonoBehaviour
             countTotalScore();
             endGameImage.gameObject.SetActive(true);
 
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKey(KeyCode.Return))
             {
                 showEndGameInfo();
             }
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 
