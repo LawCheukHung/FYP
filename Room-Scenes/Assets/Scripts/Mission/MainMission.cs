@@ -11,6 +11,7 @@ public class MainMission : MonoBehaviour
     private float timer = 180f;
     private float teachingProgress = 100f;
     private bool isTeaching = false;
+    private int badStudentAmount = 0;
 
     void Start()
     {
@@ -20,13 +21,14 @@ public class MainMission : MonoBehaviour
 
     void Update()
     {
-        countDownTimer();
+        Debug.Log(badStudentAmount);
+        checkMainMission();
         changeTeachingProgress();
     }
 
-    private void countDownTimer()
+    private void checkMainMission()
     {
-        if (timer <= 0)
+        if (timer <= 0 || teachingProgress <= 0)
         {
             endGame.setIsEndGame();
         }
@@ -39,7 +41,7 @@ public class MainMission : MonoBehaviour
 
     private void changeTeachingProgress()
     {
-        if (isTeaching)
+        if (isTeaching && badStudentAmount <= 0)
         {
             if(teachingProgress < 100)
             {
@@ -62,5 +64,10 @@ public class MainMission : MonoBehaviour
     public float getTeachingProgress()
     {
         return teachingProgress;
+    }
+
+    public void changeBadStudentAmount(int changeValue)
+    {
+        badStudentAmount += changeValue;
     }
 }
