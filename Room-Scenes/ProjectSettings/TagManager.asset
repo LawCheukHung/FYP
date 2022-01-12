@@ -7,6 +7,8 @@ TagManager:
   - Garbage
   - Student
   - Environment
+  - Mission
+  - GarbageBin
   layers:
   - Default
   - TransparentFX

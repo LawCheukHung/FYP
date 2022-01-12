@@ -7,6 +7,7 @@ public class PlayerBehavior : MonoBehaviour
 {
     public GameObject teachingBook;
     public Camera playerCam;
+    public MainMission mainMission;
 
     private GameObject currentGrabingObject;
     private GameObject currentCatchingStudent;
@@ -84,6 +85,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         teacherState = TeacherState.Idle;
         teachingBook.SetActive(false);
+        mainMission.setIsTeaching(false);
         dropObject();
     }
 
@@ -97,9 +99,13 @@ public class PlayerBehavior : MonoBehaviour
 
     private void teachStudent()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            //teaching
+            mainMission.setIsTeaching(true);
+        }
+        else
+        {
+            mainMission.setIsTeaching(false);
         }
     }
 
