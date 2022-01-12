@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
             transform.position -= Vector3.Normalize(new Vector3(playerCamera.transform.right.x, 0, playerCamera.transform.right.z)) * moveVelocity * Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && playerRigi.velocity.y == 0)
+        if (Input.GetKey(KeyCode.Space) && playerRigi.velocity.y == 0)
         {
             playerRigi.velocity = transform.up * jumpMulitply;
         }
