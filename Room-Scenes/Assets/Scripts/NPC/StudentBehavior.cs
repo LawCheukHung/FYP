@@ -15,7 +15,7 @@ public class StudentBehavior : MonoBehaviour
         mainMission = GameObject.FindGameObjectWithTag("Mission").GetComponent<MainMission>();
         studentState = StudentState.Nice;
         badValue = Random.Range(1f, 1.5f);
-        mentalValue = Random.Range(50f, 100f);
+        mentalValue = 20f;
     }
 
     void Update()
@@ -35,7 +35,7 @@ public class StudentBehavior : MonoBehaviour
     {
         studentState = StudentState.Nice;
         isBadBad = false;
-        mentalValue = 100f;
+        mentalValue = Random.Range(80f, 100f);
     }
 
     private void countDownMentalValue()

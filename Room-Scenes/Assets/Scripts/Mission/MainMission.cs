@@ -51,8 +51,12 @@ public class MainMission : MonoBehaviour
         }
         else
         {
-            teachingProgress -= Time.deltaTime;
-            teachingProgressText.text = "Teaching Progress: " + (int)teachingProgress + "%";
+            if(teachingProgress > 0)
+            {
+                teachingProgress -= Time.deltaTime;
+                teachingProgressText.text = "Teaching Progress: " + (int)teachingProgress + "%";
+            }
+            
         }
     }
 
