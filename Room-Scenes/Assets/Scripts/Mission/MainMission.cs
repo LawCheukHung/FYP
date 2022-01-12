@@ -5,14 +5,11 @@ using UnityEngine;
 
 public class MainMission : MonoBehaviour
 {
-    public GameObject gamingUI;
-    public GameObject endGameUI;
+    public EndGame endGame;
     public Text timerText;
     public Text teachingProgressText;
     private float timer = 180f;
     private float teachingProgress = 100f;
-    private float teachingIncreaseSpeed = 1f;
-    private bool isOccurBadStudent = false;
     private bool isTeaching = false;
 
     void Start()
@@ -31,9 +28,7 @@ public class MainMission : MonoBehaviour
     {
         if (timer <= 0)
         {
-            Time.timeScale = 0;
-            gamingUI.SetActive(false);
-            endGameUI.SetActive(true);
+            endGame.setIsEndGame();
         }
         else
         {
@@ -62,5 +57,10 @@ public class MainMission : MonoBehaviour
     public void setIsTeaching(bool isTeachingState)
     {
         isTeaching = isTeachingState;
+    }
+
+    public float getTeachingProgress()
+    {
+        return teachingProgress;
     }
 }

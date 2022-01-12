@@ -6,17 +6,22 @@ using UnityEngine;
 public class SideMission : MonoBehaviour
 {
     public Text sideMissionText;
-    private int totalCollectAmount;
+    private int totalCollectGarbage;
 
     void Start()
     {
-        totalCollectAmount = 0;
-        sideMissionText.text = "Total Collected Garbage: " + totalCollectAmount;
+        totalCollectGarbage = 0;
+        sideMissionText.text = "Total Collected Garbage: " + totalCollectGarbage;
     }
 
     public void countCollectGarbage()
     {
-        totalCollectAmount++;
-        sideMissionText.text = "Total Collected Garbage: " + totalCollectAmount;
+        totalCollectGarbage++;
+        sideMissionText.text = "Total Collected Garbage: " + totalCollectGarbage;
+    }
+
+    public int getTotalCollectGarbage()
+    {
+        return totalCollectGarbage;
     }
 }
