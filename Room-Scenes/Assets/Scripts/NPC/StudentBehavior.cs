@@ -12,7 +12,7 @@ public class StudentBehavior : MonoBehaviour
     void Start()
     {
         studentState = StudentState.Nice;
-        badValue = Random.Range(0.1f, 1f);
+        badValue = Random.Range(1f, 3f);
         mentalValue = 100f;
     }
 
