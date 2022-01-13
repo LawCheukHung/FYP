@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour
     public Transform playerBody;
     private float xRotation = 0f;
     private float mouseX, mouseY;
-    private float mouseSensitivity = 50f;
+    private float mouseSensitivity = 350f;
 
     void Start()
     {

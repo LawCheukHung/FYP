@@ -74,4 +74,11 @@ public class MainMission : MonoBehaviour
     {
         badStudentAmount += changeValue;
     }
+
+
+    //Added in UI branch
+    public float getTimer()
+    {
+        return timer;
+    }
 }
