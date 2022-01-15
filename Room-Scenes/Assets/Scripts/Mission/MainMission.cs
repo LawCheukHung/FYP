@@ -8,7 +8,7 @@ public class MainMission : MonoBehaviour
     public EndGame endGame;
     public Text timerText;
     public Text teachingProgressText;
-    private float timer = 180f;
+    private float timer = 10f;
     private float teachingProgress = 100f;
     private bool isTeaching = false;
     private int badStudentAmount = 0;

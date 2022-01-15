@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class objectCollision : MonoBehaviour
 {
+    private Rigidbody objectRigid;
     private SideMission sideMission;
     private PlayerBehavior player;
     private bool isHolding = false;
@@ -12,6 +13,7 @@ public class objectCollision : MonoBehaviour
     {
         sideMission = GameObject.FindGameObjectWithTag("Mission").GetComponent<SideMission>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>();
+        objectRigid = transform.GetComponent<Rigidbody>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -34,11 +36,11 @@ public class objectCollision : MonoBehaviour
 
         if (isHolding)
         {
-            transform.GetComponent<Rigidbody>().useGravity = false;
+            objectRigid.useGravity = false;
         }
         else
         {
-            transform.GetComponent<Rigidbody>().useGravity = true;
+            objectRigid.useGravity = true;
         }
     }
 }

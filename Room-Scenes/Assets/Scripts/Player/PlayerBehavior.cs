@@ -17,16 +17,13 @@ public class PlayerBehavior : MonoBehaviour
     private float aimingDistance = 1f;
     private float aimingRadius = 0.1f;
     private bool isHoldingObject = false;
-    //private int totalCaughtStudent = 0;
 
     void Start()
     {
-        //Debug.Log(totalCaughtStudent);
         teacherState = TeacherState.Idle;
         Debug.Log("idle mode");
     }
 
-    // Update is called once per frame
     void Update()
     {
         switchState();
@@ -53,7 +50,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             if (teacherState == TeacherState.Teach)
             {
-                teachingBook.SetActive(false);
+
                 initializeTeacherState();
                 Debug.Log("idle mode");
             }
@@ -147,7 +144,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (!isHoldingObject)
         {
-            Debug.Log("grab an object");
+            Debug.Log("idle mode & grab an object");
             currentGrabingObject.transform.SetParent(playerCam.transform);
             grabbingObjectState.setIsHolding(true);
             isHoldingObject = true;
@@ -158,15 +155,13 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (isHoldingObject)
         {
-            Debug.Log("drop an object");
+            Debug.Log("idle mode & drop an object");
             currentGrabingObject.transform.SetParent(null);
             grabbingObjectState.setIsHolding(false);
             isHoldingObject = false;
         }
     }
 
-    //when the grabbing object has collide with other gameObject, 
-    //the objectCollision script will call this function to drop the current grabbing object.
     public void ObjectFall()
     {
         dropObject();
@@ -178,8 +173,6 @@ public class PlayerBehavior : MonoBehaviour
         {
             catchingStudentState.initialiseStudentState();
             mainMission.changeBadStudentAmount(-1);
-            //totalCaughtStudent++;
-            //Debug.Log(totalCaughtStudent);
         }
     }
 
