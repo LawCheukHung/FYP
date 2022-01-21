@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class objectCollision : MonoBehaviour
+public class ObjectCollision : MonoBehaviour
 {
     private Rigidbody objectRigid;
-    private SideMission sideMission;
-    private PlayerBehavior player;
+    private PlayerBehavior playerBehavior;
     private bool isHolding = false;
 
     private void Start()
     {
-        sideMission = GameObject.FindGameObjectWithTag("Mission").GetComponent<SideMission>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>();
+        playerBehavior = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>();
         objectRigid = transform.GetComponent<Rigidbody>();
     }
 
@@ -20,19 +18,13 @@ public class objectCollision : MonoBehaviour
     {
         if (isHolding)
         {
-            player.ObjectFall();
-        }
-
-        if (collision.gameObject.CompareTag("GarbageBin"))
-        {
-            sideMission.countCollectGarbage();
-            gameObject.SetActive(false);
+            playerBehavior.lostObject();
         }
     }
 
-    public void setIsHolding(bool holdingState)
+    public void setIsHolding(bool currentState)
     {
-        isHolding = holdingState;
+        isHolding = currentState;
 
         if (isHolding)
         {

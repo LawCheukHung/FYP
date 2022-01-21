@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class garbageSpawn : MonoBehaviour
+public class GarbageSpawn : MonoBehaviour
 {
-    public GameObject garbage;
-    private bool isSpawn = false;
+    public GameObject garbagePrefab;
     private Vector3 garbagePosition;
-    private float spawnTime = 5;
-    private int totalGarbageAmount = 5;
+    private bool isSpawn = false;
+    private float spawnTime = 8;
 
     void Update()
     {
         countSpawnTime();
 
-        if (isSpawn && totalGarbageAmount > 0)
+        if (isSpawn)
         {
             randomPosition();
             spawnGarbage();
@@ -23,10 +22,10 @@ public class garbageSpawn : MonoBehaviour
 
     private void countSpawnTime()
     {
-        if(spawnTime <= 0)
+        if (spawnTime <= 0)
         {
             isSpawn = true;
-            spawnTime = 5;
+            initSpawnTime();
         }
         else
         {
@@ -34,11 +33,15 @@ public class garbageSpawn : MonoBehaviour
         }
     }
 
+    private void initSpawnTime()
+    {
+        spawnTime = 5;
+    }
+
     private void spawnGarbage()
     {
-        Instantiate(garbage, garbagePosition, Quaternion.identity);
+        Instantiate(garbagePrefab, garbagePosition, Quaternion.identity);
         isSpawn = false;
-        totalGarbageAmount--;
     }
 
     private void randomPosition()
