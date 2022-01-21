@@ -10,8 +10,8 @@ public class PlayerBehavior : MonoBehaviour
     public MainMission mainMission;
     private GameObject currentGrabingObject;
     private GameObject currentCatchingStudent;
-    private ObjectCollision grabbingObjectState;
-    private StudentBehavior catchingStudentState;
+    private ObjectCollision grabbingObject;
+    private StudentBehavior catchingStudent;
     private PlayerState playerState;
     private float aimingDistance = 1f;
     private float aimingRadius = 0.1f;
@@ -131,14 +131,14 @@ public class PlayerBehavior : MonoBehaviour
             if (hit.collider.tag == "Garbage" && playerState == PlayerState.Idle)
             {
                 currentGrabingObject = hit.transform.gameObject;
-                grabbingObjectState = currentGrabingObject.GetComponent<ObjectCollision>();
+                grabbingObject = currentGrabingObject.GetComponent<ObjectCollision>();
                 grabObject();
             }
 
             if (hit.collider.tag == "Student" && playerState == PlayerState.Catch)
             {
                 currentCatchingStudent = hit.transform.gameObject;
-                catchingStudentState = currentCatchingStudent.GetComponent<StudentBehavior>();
+                catchingStudent = currentCatchingStudent.GetComponent<StudentBehavior>();
                 catchTargetStudent();
             }
         }
@@ -150,7 +150,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             Debug.Log("idle mode & grabbing an object");
             currentGrabingObject.transform.SetParent(playerCam.transform);
-            grabbingObjectState.setIsHolding(true);
+            grabbingObject.setIsHolding(true);
             isHoldingObject = true;
         }
     }
@@ -161,7 +161,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             Debug.Log("idle mode & drop the object");
             currentGrabingObject.transform.SetParent(null);
-            grabbingObjectState.setIsHolding(false);
+            grabbingObject.setIsHolding(false);
             isHoldingObject = false;
         }
     }
@@ -173,9 +173,9 @@ public class PlayerBehavior : MonoBehaviour
 
     private void catchTargetStudent()
     {
-        if (catchingStudentState.getIsBadBad())
+        if (catchingStudent.getIsBadBehavingValue())
         {
-            catchingStudentState.initialiseStudentState();
+            catchingStudent.initStudentState();
             mainMission.changeBadStudentAmount(-1);
         }
     }

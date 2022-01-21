@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class GarbageCollect : MonoBehaviour
 {
-    private SideMission sideMission;
+    private CollectGarbageMission collectGarbageMission;
 
     void Start()
     {
-        sideMission = GameObject.FindGameObjectWithTag("Mission").GetComponent<SideMission>();
+        collectGarbageMission = GameObject.FindGameObjectWithTag("Mission").GetComponent<CollectGarbageMission>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("GarbageBin"))
         {
-            sideMission.countCollectGarbage();
+            collectGarbageMission.countTotalCollectGarbage();
             gameObject.SetActive(false);
         }
     }

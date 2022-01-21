@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     //public Rigidbody playerRigi;
     public Camera playerCamera;
     public float moveVelocity = 2f;
-    public float jumpMulitply = 5f;
+    //public float jumpMulitply = 5f;
 
     //void Start()
     //{

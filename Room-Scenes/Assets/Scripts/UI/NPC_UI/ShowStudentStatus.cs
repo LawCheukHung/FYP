@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
-public class showStatus : MonoBehaviour
+public class ShowStudentStatus : MonoBehaviour
 {
-    public StudentBehavior studentStatus;
-    public Text currentTextInfo;
+    public StudentBehavior studentBehavior;
+    public Text currentStudentText;
     private Transform playerCamera;
 
     void Start()
@@ -16,7 +16,7 @@ public class showStatus : MonoBehaviour
 
     void Update()
     {
-        currentTextInfo.text = "Mental Value: " + (int)studentStatus.getMentalValue();
+        currentStudentText.text = "Mental Value: " + (int)studentBehavior.getMentalValue();
         transform.LookAt(transform.position + playerCamera.forward);
     }
 }
