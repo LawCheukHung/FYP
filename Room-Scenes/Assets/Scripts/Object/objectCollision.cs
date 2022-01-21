@@ -2,43 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class objectCollision : MonoBehaviour
+public class ObjectCollision : MonoBehaviour
 {
-    private SideMission sideMission;
-    private PlayerBehavior player;
+    private Rigidbody objectRigid;
+    private PlayerBehavior playerBehavior;
     private bool isHolding = false;
 
     private void Start()
     {
-        sideMission = GameObject.FindGameObjectWithTag("Mission").GetComponent<SideMission>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>();
+        playerBehavior = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>();
+        objectRigid = transform.GetComponent<Rigidbody>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (isHolding)
         {
-            player.ObjectFall();
-        }
-
-        if (collision.gameObject.CompareTag("GarbageBin"))
-        {
-            sideMission.countCollectGarbage();
-            gameObject.SetActive(false);
+            playerBehavior.lostObject();
         }
     }
 
-    public void setIsHolding(bool holdingState)
+    public void setIsHolding(bool currentState)
     {
-        isHolding = holdingState;
+        isHolding = currentState;
 
         if (isHolding)
         {
-            transform.GetComponent<Rigidbody>().useGravity = false;
+            objectRigid.useGravity = false;
         }
         else
         {
-            transform.GetComponent<Rigidbody>().useGravity = true;
+            objectRigid.useGravity = true;
         }
     }
 }

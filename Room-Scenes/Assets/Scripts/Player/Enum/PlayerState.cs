@@ -1,4 +1,4 @@
-﻿enum TeacherState
+﻿enum PlayerState
 {
     Teach,
     Catch,

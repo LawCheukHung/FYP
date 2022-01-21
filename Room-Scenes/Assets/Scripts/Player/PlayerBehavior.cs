@@ -5,41 +5,38 @@ using UnityEngine.UI;
 
 public class PlayerBehavior : MonoBehaviour
 {
-    public GameObject teachingBook;
     public Camera playerCam;
+    public GameObject teacherBook;
     public MainMission mainMission;
-
     private GameObject currentGrabingObject;
     private GameObject currentCatchingStudent;
-    private objectCollision grabbingObjectState;
-    private StudentBehavior catchingStudentState;
-    private TeacherState teacherState;
+    private ObjectCollision grabbingObject;
+    private StudentBehavior catchingStudent;
+    private PlayerState playerState;
     private float aimingDistance = 1f;
     private float aimingRadius = 0.1f;
     private bool isHoldingObject = false;
-    //private int totalCaughtStudent = 0;
+    private bool isAfterTeaching = false;
 
     void Start()
     {
-        //Debug.Log(totalCaughtStudent);
-        teacherState = TeacherState.Idle;
+        playerState = PlayerState.Idle;
         Debug.Log("idle mode");
     }
 
-    // Update is called once per frame
     void Update()
     {
         switchState();
 
-        switch (teacherState)
+        switch (playerState)
         {
-            case TeacherState.Catch:
+            case PlayerState.Catch:
                 catchStudent();
                 break;
-            case TeacherState.Teach:
+            case PlayerState.Teach:
                 teachStudent();
                 break;
-            case TeacherState.Idle:
+            case PlayerState.Idle:
                 collectObject();
                 break;
             default:
@@ -51,40 +48,39 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            if (teacherState == TeacherState.Teach)
+            if (playerState == PlayerState.Teach)
             {
-                teachingBook.SetActive(false);
-                initializeTeacherState();
+                initPlayerState();
                 Debug.Log("idle mode");
             }
             else
             {
-                initializeTeacherState();
-                teachingBook.SetActive(true);
-                teacherState = TeacherState.Teach;
+                initPlayerState();
+                teacherBook.SetActive(true);
+                playerState = PlayerState.Teach;
                 Debug.Log("teach mode");
             }
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            if (teacherState == TeacherState.Catch)
+            if (playerState == PlayerState.Catch)
             {
-                initializeTeacherState();
+                initPlayerState();
                 Debug.Log("idle mode");
             }
             else
             {
-                initializeTeacherState();
-                teacherState = TeacherState.Catch;
+                initPlayerState();
+                playerState = PlayerState.Catch;
                 Debug.Log("catch mode");
             }
         }
     }
 
-    private void initializeTeacherState()
+    private void initPlayerState()
     {
-        teacherState = TeacherState.Idle;
-        teachingBook.SetActive(false);
+        playerState = PlayerState.Idle;
+        teacherBook.SetActive(false);
         mainMission.setIsTeaching(false);
         dropObject();
     }
@@ -102,10 +98,15 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             mainMission.setIsTeaching(true);
+            isAfterTeaching = true;
         }
         else
         {
-            mainMission.setIsTeaching(false);
+            if (isAfterTeaching)
+            {
+                mainMission.setIsTeaching(false);
+                isAfterTeaching = false;
+            }
         }
     }
 
@@ -127,17 +128,17 @@ public class PlayerBehavior : MonoBehaviour
 
         if (Physics.SphereCast(playerCam.transform.position, aimingRadius, playerCam.transform.forward, out hit, aimingDistance))
         {
-            if (hit.collider.tag == "Garbage" && teacherState == TeacherState.Idle)
+            if (hit.collider.tag == "Garbage" && playerState == PlayerState.Idle)
             {
                 currentGrabingObject = hit.transform.gameObject;
-                grabbingObjectState = currentGrabingObject.GetComponent<objectCollision>();
+                grabbingObject = currentGrabingObject.GetComponent<ObjectCollision>();
                 grabObject();
             }
 
-            if (hit.collider.tag == "Student" && teacherState == TeacherState.Catch)
+            if (hit.collider.tag == "Student" && playerState == PlayerState.Catch)
             {
                 currentCatchingStudent = hit.transform.gameObject;
-                catchingStudentState = currentCatchingStudent.GetComponent<StudentBehavior>();
+                catchingStudent = currentCatchingStudent.GetComponent<StudentBehavior>();
                 catchTargetStudent();
             }
         }
@@ -147,9 +148,9 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (!isHoldingObject)
         {
-            Debug.Log("grab an object");
+            Debug.Log("idle mode & grabbing an object");
             currentGrabingObject.transform.SetParent(playerCam.transform);
-            grabbingObjectState.setIsHolding(true);
+            grabbingObject.setIsHolding(true);
             isHoldingObject = true;
         }
     }
@@ -158,28 +159,24 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (isHoldingObject)
         {
-            Debug.Log("drop an object");
+            Debug.Log("idle mode & drop the object");
             currentGrabingObject.transform.SetParent(null);
-            grabbingObjectState.setIsHolding(false);
+            grabbingObject.setIsHolding(false);
             isHoldingObject = false;
         }
     }
 
-    //when the grabbing object has collide with other gameObject, 
-    //the objectCollision script will call this function to drop the current grabbing object.
-    public void ObjectFall()
+    public void lostObject()
     {
         dropObject();
     }
 
     private void catchTargetStudent()
     {
-        if (catchingStudentState.getIsBadBad())
+        if (catchingStudent.getIsBadBehavingValue())
         {
-            catchingStudentState.initialiseStudentState();
+            catchingStudent.initStudentState();
             mainMission.changeBadStudentAmount(-1);
-            //totalCaughtStudent++;
-            //Debug.Log(totalCaughtStudent);
         }
     }
 

@@ -7,12 +7,13 @@ public class CameraMovement : MonoBehaviour
     public Transform playerBody;
     private float xRotation = 0f;
     private float mouseX, mouseY;
-    private float mouseSensitivity = 50f;
+    private float mouseSensitivity;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        mouseSensitivity = 300f;
     }
 
     void Update()
@@ -25,5 +26,10 @@ public class CameraMovement : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
+    }
+
+    public void setMouseSensitivity(float sensitiveValue)
+    {
+        mouseSensitivity = sensitiveValue;
     }
 }
