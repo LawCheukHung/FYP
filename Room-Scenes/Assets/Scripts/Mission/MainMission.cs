@@ -6,7 +6,7 @@ public class MainMission : MonoBehaviour
 {
     public GamingUI gamingUI;
     public EndGameUI endGameUI;
-    private float timer = 3f;
+    private float timer = 180f;
     private float teachingProgress = 100f;
     private bool isTeaching = false;
     private int badStudentAmount = 0;
