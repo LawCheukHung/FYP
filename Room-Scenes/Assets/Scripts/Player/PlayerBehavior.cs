@@ -17,6 +17,7 @@ public class PlayerBehavior : MonoBehaviour
     private float aimingRadius = 0.1f;
     private bool isHoldingObject = false;
     private bool isAfterTeaching = false;
+    private int chalkAmount = 0;
 
     void Start()
     {
@@ -108,6 +109,11 @@ public class PlayerBehavior : MonoBehaviour
                 isAfterTeaching = false;
             }
         }
+
+        if (Input.GetMouseButton(1) && chalkAmount > 0 && !isAfterTeaching)
+        {
+            //shoot chalk
+        }
     }
 
     private void collectObject()
@@ -141,6 +147,13 @@ public class PlayerBehavior : MonoBehaviour
                 catchingStudent = currentCatchingStudent.GetComponent<StudentBehavior>();
                 catchTargetStudent();
             }
+
+            if (hit.collider.tag == "Chalk" && playerState == PlayerState.Idle)
+            {
+                currentGrabingObject = hit.transform.gameObject;
+                grabbingObject = currentGrabingObject.GetComponent<ObjectCollision>();
+                //call chalk script
+            }
         }
     }
 
@@ -148,7 +161,6 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (!isHoldingObject)
         {
-            Debug.Log("idle mode & grabbing an object");
             currentGrabingObject.transform.SetParent(playerCam.transform);
             grabbingObject.setIsHolding(true);
             isHoldingObject = true;
@@ -159,7 +171,6 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (isHoldingObject)
         {
-            Debug.Log("idle mode & drop the object");
             currentGrabingObject.transform.SetParent(null);
             grabbingObject.setIsHolding(false);
             isHoldingObject = false;

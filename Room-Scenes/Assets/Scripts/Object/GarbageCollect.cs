@@ -5,10 +5,12 @@ using UnityEngine;
 public class GarbageCollect : MonoBehaviour
 {
     private CollectGarbageMission collectGarbageMission;
+    private PlayerBehavior playerBehavior;
 
     void Start()
     {
         collectGarbageMission = GameObject.FindGameObjectWithTag("Mission").GetComponent<CollectGarbageMission>();
+        playerBehavior = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -16,6 +18,7 @@ public class GarbageCollect : MonoBehaviour
         if (collision.gameObject.CompareTag("GarbageBin"))
         {
             collectGarbageMission.countTotalCollectGarbage();
+            playerBehavior.lostObject();
             gameObject.SetActive(false);
         }
     }
