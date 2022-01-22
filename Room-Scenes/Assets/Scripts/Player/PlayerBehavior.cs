@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerBehavior : MonoBehaviour
 {
     public Camera playerCam;
-    public GameObject teacherBook;
+    public GameObject handsObjects;
     public MainMission mainMission;
     private GameObject currentGrabingObject;
     private GameObject currentCatchingStudent;
@@ -57,7 +57,7 @@ public class PlayerBehavior : MonoBehaviour
             else
             {
                 initPlayerState();
-                teacherBook.SetActive(true);
+                handsObjects.SetActive(true);
                 playerState = PlayerState.Teach;
                 Debug.Log("teach mode");
             }
@@ -81,7 +81,7 @@ public class PlayerBehavior : MonoBehaviour
     private void initPlayerState()
     {
         playerState = PlayerState.Idle;
-        teacherBook.SetActive(false);
+        handsObjects.SetActive(false);
         mainMission.setIsTeaching(false);
         dropObject();
     }
