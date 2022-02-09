@@ -18,7 +18,7 @@ public class GarbageCollect : MonoBehaviour
         if (collision.gameObject.CompareTag("GarbageBin"))
         {
             collectGarbageMission.countTotalCollectGarbage();
-            playerBehavior.lostObject();
+            playerBehavior.dropTargetObject();
             gameObject.SetActive(false);
         }
     }

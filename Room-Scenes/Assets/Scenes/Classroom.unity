@@ -6569,7 +6569,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1198727621}
-  - component: {fileID: 1198727620}
   m_Layer: 0
   m_Name: StudentSpawnSystem
   m_TagString: Untagged
@@ -6577,41 +6576,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1198727620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198727619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 278f6ea7c52497546b5a852c5f9ea14f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  studentPrefab: {fileID: 3456619417514944766, guid: 4e6fb16d7f3a5734a8a9317981458a4a,
-    type: 3}
-  studentSeatPos:
-  - {fileID: 889495253}
-  - {fileID: 2138100860}
-  - {fileID: 1694228100}
-  - {fileID: 1804269325}
-  - {fileID: 1034309689}
-  - {fileID: 954776098}
-  - {fileID: 878516626}
-  - {fileID: 347048688}
-  - {fileID: 1540035792}
-  - {fileID: 290173423}
-  - {fileID: 1471550783}
-  - {fileID: 966405831}
-  - {fileID: 1244471909}
-  - {fileID: 266476225}
-  - {fileID: 1388354097}
-  - {fileID: 404101815}
-  - {fileID: 1463798631}
-  - {fileID: 2113023249}
-  - {fileID: 1355313153}
-  - {fileID: 1680808240}
 --- !u!4 &1198727621
 Transform:
   m_ObjectHideFlags: 0
@@ -8530,8 +8494,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1670235490}
-  - component: {fileID: 1670235489}
-  - component: {fileID: 1670235488}
   m_Layer: 0
   m_Name: MissionSystem
   m_TagString: Mission
@@ -8539,32 +8501,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1670235488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670235487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 858e49feac2acef4cb800f7e75085941, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1670235489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670235487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6907797b3e726f3459d2ec244e3396b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gamingUI: {fileID: 2074472982}
-  endGameUI: {fileID: 1714149961}
 --- !u!4 &1670235490
 Transform:
   m_ObjectHideFlags: 0
@@ -8909,7 +8845,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1714149960}
-  - component: {fileID: 1714149961}
   m_Layer: 0
   m_Name: EndGameUI
   m_TagString: Untagged
@@ -8932,22 +8867,6 @@ Transform:
   m_Father: {fileID: 177988690}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1714149961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1714149959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6059037e13040e4f8ed113ef193a0e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gamingUI: {fileID: 2074472980}
-  mainMission: {fileID: 1670235489}
-  collectGarbageMission: {fileID: 1670235488}
-  endGameText: {fileID: 1812617320}
 --- !u!1001 &1723239918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9521,7 +9440,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1766348155}
-  - component: {fileID: 1766348154}
   m_Layer: 0
   m_Name: ObjectSpawnSystem
   m_TagString: Untagged
@@ -9529,22 +9447,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1766348154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766348153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 963a78721ed91954984c9a5ede7f8a80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  garbagePrefab: {fileID: 5949319026857421196, guid: d07bc4160ae895f4cbd9a152bc0e6306,
-    type: 3}
-  chalkPrefab: {fileID: 8589087543819783000, guid: f035b11a469cfba4894296e0a8ea9437,
-    type: 3}
 --- !u!4 &1766348155
 Transform:
   m_ObjectHideFlags: 0
@@ -11303,7 +11205,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2074472981}
-  - component: {fileID: 2074472982}
   m_Layer: 0
   m_Name: GamingUI
   m_TagString: Untagged
@@ -11329,23 +11230,6 @@ Transform:
   m_Father: {fileID: 177988690}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2074472982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2074472980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9adb8d2fcd3e81d4ab65f895816f13c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMission: {fileID: 1670235489}
-  collectGarbageMission: {fileID: 1670235488}
-  teachingProgressText: {fileID: 559067436}
-  sideMissionText: {fileID: 1961952692}
-  timerText: {fileID: 1483066170}
 --- !u!1001 &2077386395
 PrefabInstance:
   m_ObjectHideFlags: 0
