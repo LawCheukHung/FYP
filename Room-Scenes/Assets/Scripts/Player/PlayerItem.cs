@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChalkCollect : MonoBehaviour
+public class PlayerItem : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
