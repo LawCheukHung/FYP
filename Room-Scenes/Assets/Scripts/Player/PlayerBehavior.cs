@@ -161,6 +161,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (isHoldingObject)
         {
+            grabbingObject.dropObject();
             isHoldingObject = false;
         }
     }

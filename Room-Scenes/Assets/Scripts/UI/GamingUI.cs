@@ -14,7 +14,7 @@ public class GamingUI : MonoBehaviour
     void Update()
     {
         teachingProgressText.text = "Teaching Progress: " + (int)mainMission.getTeachingProgress() + " %";
-        sideMissionText.text = "Total Collected Garbage: " + collectGarbageMission.getTotalCollectGarbage();
+        sideMissionText.text = "Total Collected Garbage: " + collectGarbageMission.getcollectAmount();
         timerText.text = "Lesson Remaining Timer: " + (int)mainMission.getTimer();
     }
 }

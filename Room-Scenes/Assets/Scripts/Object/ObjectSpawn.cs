@@ -6,42 +6,22 @@ public class ObjectSpawn : MonoBehaviour
 {
     public GameObject garbagePrefab;
     public GameObject chalkPrefab;
+    public GameObject brushPrefab;
+
     private GameObject spawnObjectPrefab;
     private Vector3 spawnPos;
-    private bool isSpawn = false;
     private float spawnTime = 8;
 
     void Update()
     {
-        countSpawnTime();
-
-        if (isSpawn)
-        {
-            randomPosition();
-            randomSpawnItem();
-            spawnObject();
-        }
+        countDownToSpawnObject();
     }
 
-    private void randomSpawnItem()
-    {
-        float randNum = Random.Range(0, 1);
-
-        if (randNum < 0.5)
-        {
-            spawnObjectPrefab = garbagePrefab;
-        }
-        else
-        {
-            spawnObjectPrefab = chalkPrefab;
-        }
-    }
-
-    private void countSpawnTime()
+    private void countDownToSpawnObject()
     {
         if (spawnTime <= 0)
         {
-            isSpawn = true;
+            spawnObject();
             initSpawnTime();
         }
         else
@@ -52,13 +32,34 @@ public class ObjectSpawn : MonoBehaviour
 
     private void initSpawnTime()
     {
-        spawnTime = 5;
+        spawnTime = 8;
     }
 
     private void spawnObject()
     {
+        randomSpawnObject();
+        randomPosition();
         Instantiate(spawnObjectPrefab, spawnPos, Quaternion.identity);
-        isSpawn = false;
+    }
+
+    private void randomSpawnObject()
+    {
+        float randNum = Random.Range(0, 2);
+
+        switch (randNum)
+        {
+            case 0:
+                spawnObjectPrefab = garbagePrefab;
+                break;
+            case 1:
+                spawnObjectPrefab = chalkPrefab;
+                break;
+            case 2:
+                spawnObjectPrefab = brushPrefab;
+                break;
+            default:
+                break;
+        }
     }
 
     private void randomPosition()

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class CollectGarbageMission : MonoBehaviour
 {
-    private int totalCollectGarbage = 0;
+    private int collectAmount = 0;
 
-    public void countTotalCollectGarbage()
+    public void addGarbageCollectAmount()
     {
-        totalCollectGarbage++;
+        collectAmount++;
     }
 
-    public int getTotalCollectGarbage()
+    public int getcollectAmount()
     {
-        return totalCollectGarbage;
+        return collectAmount;
     }
 }
