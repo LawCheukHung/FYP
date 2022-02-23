@@ -47,6 +47,11 @@ public class MainMission : MonoBehaviour
         }
     }
 
+    private void boostTeachingProgress()
+    {
+        
+    }
+
     public void setIsTeaching(bool currentState)
     {
         isTeaching = currentState;

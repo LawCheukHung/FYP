@@ -6570,7 +6570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1198727621}
   m_Layer: 0
-  m_Name: StudentSpawnSystem
+  m_Name: StudentControlSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9441,7 +9441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1766348155}
   m_Layer: 0
-  m_Name: ObjectSpawnSystem
+  m_Name: ObjectControlSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
