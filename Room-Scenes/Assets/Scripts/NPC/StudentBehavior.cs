@@ -42,7 +42,7 @@ public class StudentBehavior : MonoBehaviour
 
     private void changeStudentState()
     {
-        studentState = (StudentState)((int)Random.Range(0, 3));
+        studentState = (StudentState)((int)Random.Range(1, 3));
         mainMission.changeBadStudentAmount(1);
     }
 

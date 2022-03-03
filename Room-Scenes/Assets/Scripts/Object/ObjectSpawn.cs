@@ -7,6 +7,7 @@ public class ObjectSpawn : MonoBehaviour
     public GameObject garbagePrefab;
     public GameObject chalkPrefab;
     public GameObject brushPrefab;
+    public GameObject rulerPrefab;
 
     private GameObject spawnObjectPrefab;
     private Vector3 spawnPos;
@@ -56,6 +57,9 @@ public class ObjectSpawn : MonoBehaviour
                 break;
             case 2:
                 spawnObjectPrefab = brushPrefab;
+                break;
+            case 3:
+                spawnObjectPrefab = rulerPrefab;
                 break;
             default:
                 break;

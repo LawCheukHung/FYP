@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StudentControl : MonoBehaviour
+public class PlayerInventory : MonoBehaviour
 {
+    
 
     void Start()
     {
@@ -13,10 +14,5 @@ public class StudentControl : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void initAllStudentMentalValue()
-    {
-
     }
 }

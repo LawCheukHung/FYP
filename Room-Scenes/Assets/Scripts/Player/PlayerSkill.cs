@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerSkill : MonoBehaviour
 {
+    public MainMission mainMission;
+    public StudentControl studentControl;
+
     private PlayerSkillState playerSkillState;
-    private StudentControl studentControl;
-    private MainMission mainMission;
-    private float allCoolDownCountTime;
-    private float teachingBoostCountTime;
+    private float allCoolDownCountTime = 5f;
+    private float teachingBoostCountTime = 3f;
+    private bool isAllCoolDownTriggered = false;
+    private bool isTeachingBoostTriggered = false;
 
     void Start()
     {
@@ -17,51 +20,72 @@ public class PlayerSkill : MonoBehaviour
 
     void Update()
     {
-        switchPlayerSkillState();
-
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.F) && teachingBoostCountTime <= 0)
         {
-            useSkill();
+            teachingBoost();
         }
-    }
 
-    private void switchPlayerSkillState()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.G) && allCoolDownCountTime <= 0)
         {
-            playerSkillState = PlayerSkillState.teachingBoost;
+            allCoolDown();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            playerSkillState = PlayerSkillState.allCoolDown;
-        }
-    }
 
-    private void useSkill()
-    {
-        switch ((int)playerSkillState)
+        if (isTeachingBoostTriggered)
         {
-            case 0: teachingBoost();
-                break;
-            case 1: allCoolDown();
-                break;
-            default:
-                break;
+            countTeachingBoostTime();
+        }
+
+        if (isAllCoolDownTriggered)
+        {
+            countAllCoolDownTime();
         }
     }
 
     private void allCoolDown()
     {
-        
+        studentControl.initAllStudentMentalValue();
+        isAllCoolDownTriggered = true;
     }
 
     private void teachingBoost()
     {
-
+        mainMission.boostTeachingProgress(3f);
+        isTeachingBoostTriggered = true;
     }
 
-    public int getPlayerSkillState()
+    private void countAllCoolDownTime()
     {
-        return (int)playerSkillState;
+        if (allCoolDownCountTime > 0)
+        {
+            allCoolDownCountTime -= Time.deltaTime;
+        }
+        else
+        {
+            isAllCoolDownTriggered = false;
+            initAllCoolDownCountTime();
+        }
+    }
+
+    private void countTeachingBoostTime()
+    {
+        if (teachingBoostCountTime > 0)
+        {
+            teachingBoostCountTime -= Time.deltaTime;
+        }
+        else
+        {
+            isTeachingBoostTriggered = false;
+            initTeachingBoostCountTime();
+        }
+    }
+
+    private void initAllCoolDownCountTime()
+    {
+        allCoolDownCountTime = 5f;
+    }
+
+    private void initTeachingBoostCountTime()
+    {
+        teachingBoostCountTime = 3f;
     }
 }

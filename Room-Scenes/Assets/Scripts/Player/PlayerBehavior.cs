@@ -6,21 +6,20 @@ using UnityEngine.UI;
 public class PlayerBehavior : MonoBehaviour
 {
     public Camera playerCam;
-    public GameObject playerObject;
     public MainMission mainMission;
+    public PlayerTools playerTools;
+    public PlayerShootItems playerShootItems;
 
+    private PlayerBehaviorState playerBehaviorState;
     private GameObject target;
     private ObjectBehavior targetObject;
     private StudentBehavior targetStudent;
-    private PlayerState playerState;
-    private float aimingDistance = 1f;
-    private float aimingRadius = 0.1f;
     private bool isHoldingObject = false;
     private bool isAfterTeaching = false;
 
     void Start()
     {
-        playerState = PlayerState.Idle;
+        playerBehaviorState = PlayerBehaviorState.Idle;
         Debug.Log("idle mode");
     }
 
@@ -28,15 +27,15 @@ public class PlayerBehavior : MonoBehaviour
     {
         switchState();
 
-        switch (playerState)
+        switch (playerBehaviorState)
         {
-            case PlayerState.Catch:
+            case PlayerBehaviorState.Catch:
                 catching();
                 break;
-            case PlayerState.Teach:
+            case PlayerBehaviorState.Teach:
                 teaching();
                 break;
-            case PlayerState.Idle:
+            case PlayerBehaviorState.Idle:
                 picking();
                 break;
             default:
@@ -48,29 +47,30 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if(playerState != PlayerState.Teach)
+            if(playerBehaviorState != PlayerBehaviorState.Teach)
             {
                 initPlayerState();
-                playerObject.SetActive(true);
-                playerState = PlayerState.Teach;
+                playerBehaviorState = PlayerBehaviorState.Teach;
+                playerTools.showObject();
+                playerShootItems.showShootItem();
                 Debug.Log("teach mode");
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (playerState != PlayerState.Catch)
+            if (playerBehaviorState != PlayerBehaviorState.Catch)
             {
                 initPlayerState();
-                playerState = PlayerState.Catch;
+                playerBehaviorState = PlayerBehaviorState.Catch;
                 Debug.Log("catch mode");
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (playerState != PlayerState.Idle)
+            if (playerBehaviorState != PlayerBehaviorState.Idle)
             {
                 initPlayerState();
-                playerState = PlayerState.Idle;
+                playerBehaviorState = PlayerBehaviorState.Idle;
                 Debug.Log("idle mode");
             }
         }
@@ -78,8 +78,9 @@ public class PlayerBehavior : MonoBehaviour
 
     private void initPlayerState()
     {
-        playerState = PlayerState.Idle;
-        playerObject.SetActive(false);
+        playerBehaviorState = PlayerBehaviorState.Idle;
+        playerTools.hideObject();
+        playerShootItems.hideShootItem();
     }
 
     private void teaching()
@@ -100,7 +101,7 @@ public class PlayerBehavior : MonoBehaviour
 
         if(Input.GetMouseButton(1) && !isAfterTeaching)
         {
-            //shoot objects
+            shootObject();
         }
     }
 
@@ -118,7 +119,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             shootRaycast();
         }
-        else
+        else if (Input.GetMouseButton(1))
         {
             dropTargetObject();
         }
@@ -128,27 +129,48 @@ public class PlayerBehavior : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.SphereCast(playerCam.transform.position, aimingRadius, playerCam.transform.forward, out hit, aimingDistance))
+        if (Physics.SphereCast(playerCam.transform.position, 0.1f, playerCam.transform.forward, out hit, 1f))
         {
-            if (hit.collider.tag == "Garbage" && playerState == PlayerState.Idle)
+            if (hit.collider.tag == "Garbage" && playerBehaviorState == PlayerBehaviorState.Idle)
             {
                 target = hit.transform.gameObject;
                 targetObject = target.GetComponent<ObjectBehavior>();
                 grabTargetObject();
             }
 
-            if (hit.collider.tag == "Chalk" && playerState == PlayerState.Idle)
-            {
-                target = hit.transform.gameObject;
-            }
-
-            if (hit.collider.tag == "Student" && playerState == PlayerState.Catch)
+            if (hit.collider.tag == "Student" && playerBehaviorState == PlayerBehaviorState.Catch)
             {
                 target = hit.transform.gameObject;
                 targetStudent = target.GetComponent<StudentBehavior>();
                 catchTargetStudent();
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Chalk"))
+        {
+            gameObject.SetActive(false);
+            playerShootItems.setChalkAmount(1);
+        }
+
+        if (collision.gameObject.CompareTag("Ruler"))
+        {
+            gameObject.SetActive(false);
+            playerShootItems.setRulerAmount(1);
+        }
+
+        if (collision.gameObject.CompareTag("Brush"))
+        {
+            gameObject.SetActive(false);
+            playerShootItems.setBrushAmount(1);
+        }
+    }
+
+    private void shootObject()
+    {
+        //shoot object
     }
 
     private void grabTargetObject()
@@ -182,6 +204,6 @@ public class PlayerBehavior : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(playerCam.transform.position + playerCam.transform.forward * aimingDistance, aimingRadius);
+        Gizmos.DrawWireSphere(playerCam.transform.position + playerCam.transform.forward * 1f, 0.1f);
     }
 }
