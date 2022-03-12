@@ -7,17 +7,20 @@ public class PlayerInventory : MonoBehaviour
     public GameObject chalk;
     public GameObject ruler;
     public GameObject brush;
-
     private PlayerInventoryObjectState playerInventoryObjectState;
-    private GameObject currentObject;
-    private int chalkAmount = 0;
-    private int rulerAmount = 0;
-    private int brushAmount = 0;
+    private GameObject[] chalkArr;
+    private GameObject[] rulerArr;
+    private GameObject[] brushArr;
+    private int chalkPivot = 0;
+    private int rulerPivot = 0;
+    private int brushPivot = 0;
 
     void Start()
     {
+        chalkArr = new GameObject[5];
+        rulerArr = new GameObject[5];
+        brushArr = new GameObject[5];
         playerInventoryObjectState = PlayerInventoryObjectState.Null;
-        currentObject = null;
     }
 
     void Update()
@@ -30,64 +33,118 @@ public class PlayerInventory : MonoBehaviour
         if (Input.GetKey(KeyCode.Keypad1))
         {
             playerInventoryObjectState = PlayerInventoryObjectState.Chalk;
-            currentObject = chalk;
         }
 
         if (Input.GetKey(KeyCode.Keypad2))
         {
             playerInventoryObjectState = PlayerInventoryObjectState.Ruler;
-            currentObject = ruler;
         }
 
         if (Input.GetKey(KeyCode.Keypad3))
         {
             playerInventoryObjectState = PlayerInventoryObjectState.Brush;
-            currentObject = brush;
         }
     }
 
-    private void initObjects()
+    public void showShootItem()
+    {
+        if (playerInventoryObjectState == PlayerInventoryObjectState.Chalk && chalkPivot > 0)
+        {
+            hideShootItem();
+            chalk.SetActive(true);
+        }
+        else if (playerInventoryObjectState == PlayerInventoryObjectState.Ruler && rulerPivot > 0)
+        {
+            hideShootItem();
+            ruler.SetActive(true);
+        }
+        else if (playerInventoryObjectState == PlayerInventoryObjectState.Brush && brushPivot > 0)
+        {
+            hideShootItem();
+            brush.SetActive(true);
+        }
+        else
+        {
+            hideShootItem();
+            playerInventoryObjectState = PlayerInventoryObjectState.Null;
+        }
+    }
+
+    public void hideShootItem()
     {
         chalk.SetActive(false);
         ruler.SetActive(false);
         brush.SetActive(false);
     }
 
-    public void showShootItem()
+    public int getPlayerInventoryObjectState()
     {
-        if (playerInventoryObjectState == PlayerInventoryObjectState.Chalk && chalkAmount > 0)
+        return (int)playerInventoryObjectState;
+    }
+
+    public int getPlayerInvertoryPivot(int state)
+    {
+        switch ((PlayerInventoryObjectState)state)
         {
-            setChalkAmount(-1);
+            case PlayerInventoryObjectState.Chalk:
+                return chalkPivot;
+            case PlayerInventoryObjectState.Ruler:
+                return rulerPivot;
+            case PlayerInventoryObjectState.Brush:
+                return brushPivot;
+            default:
+                return 0;
         }
-        else if (playerInventoryObjectState == PlayerInventoryObjectState.Ruler && rulerAmount > 0)
+    }
+
+    public void registerShootingObject(ref GameObject shootingObject, int objectType)
+    {
+        switch (objectType)
         {
-            setRulerAmount(-1);
+            case 1:
+                chalkArr[chalkPivot] = shootingObject;
+                shootingObject.SetActive(false);
+                chalkPivot++;
+                break;
+            case 2:
+                rulerArr[rulerPivot] = shootingObject;
+                shootingObject.SetActive(false);
+                rulerPivot++;
+                break;
+            case 3:
+                brushArr[brushPivot] = shootingObject;
+                shootingObject.SetActive(false);
+                brushPivot++;
+                break;
+            default:
+                break;
         }
-        else if (playerInventoryObjectState == PlayerInventoryObjectState.Brush && brushAmount > 0)
+    }
+
+    public void releaseShootingObject(ref GameObject currentShootingObject)
+    {
+        switch (playerInventoryObjectState)
         {
-            setBrushAmount(-1);
+            case PlayerInventoryObjectState.Chalk:
+                currentShootingObject = chalkArr[chalkPivot];
+                currentShootingObject.transform.position = chalk.transform.position;
+                chalkArr[chalkPivot] = null;
+                chalkPivot--;
+                break;
+            case PlayerInventoryObjectState.Ruler:
+                currentShootingObject = rulerArr[rulerPivot];
+                currentShootingObject.transform.position = ruler.transform.position;
+                rulerArr[rulerPivot] = null;
+                rulerPivot--;
+                break;
+            case PlayerInventoryObjectState.Brush:
+                currentShootingObject = brushArr[brushPivot];
+                currentShootingObject.transform.position = brush.transform.position;
+                brushArr[brushPivot] = null;
+                brushPivot--;
+                break;
+            default:
+                break;
         }
-
-        currentObject.SetActive(true);
-    }
-
-    public void hideShootItem()
-    {
-        currentObject.SetActive(false);
-    }
-
-    public void setChalkAmount(int change)
-    {
-        chalkAmount += change;
-    }
-
-    public void setRulerAmount(int change)
-    {
-        rulerAmount += change;
-    }
-
-    public void setBrushAmount(int change)
-    {
-        brushAmount += change;
     }
 }

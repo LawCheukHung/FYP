@@ -3077,9 +3077,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d35d31a131dc534eb03f91baf1963fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chalk: {fileID: 0}
-  ruler: {fileID: 0}
-  brush: {fileID: 0}
+  chalk: {fileID: 7171194840732676453, guid: b7657cec0190fc44da3af6812edbd6b2, type: 3}
+  ruler: {fileID: 3519714803008805669, guid: 4c3315f059fd3e240a2fdc25dff5b4f2, type: 3}
+  brush: {fileID: 4625735557058331281, guid: 25a436fee1268064392c08ebfe86477a, type: 3}
 --- !u!1001 &584403374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6688,7 +6688,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278f6ea7c52497546b5a852c5f9ea14f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  studentControl: {fileID: 1198727622}
   studentPrefab: {fileID: 3456619417514944766, guid: 4e6fb16d7f3a5734a8a9317981458a4a,
     type: 3}
   studentSeatPos:

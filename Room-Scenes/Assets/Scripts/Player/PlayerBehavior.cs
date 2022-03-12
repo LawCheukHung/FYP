@@ -9,8 +9,9 @@ public class PlayerBehavior : MonoBehaviour
     public MainMission mainMission;
     public PlayerTools playerTools;
     public PlayerInventory playerInventory;
-
     private PlayerBehaviorState playerBehaviorState;
+    private GameObject currentShootingObject;
+    private GameObject collectedObject;
     private GameObject target;
     private ObjectBehavior targetObject;
     private StudentBehavior targetStudent;
@@ -56,7 +57,7 @@ public class PlayerBehavior : MonoBehaviour
                 initPlayerState();
                 playerBehaviorState = PlayerBehaviorState.Teach;
                 playerTools.showObject();
-                //playerInventory.showShootItem();
+                playerInventory.showShootItem();
                 Debug.Log("teach mode");
             }
         }
@@ -84,7 +85,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         playerBehaviorState = PlayerBehaviorState.Idle;
         playerTools.hideObject();
-        //playerInventory.hideShootItem();
+        playerInventory.hideShootItem();
     }
 
     private void teaching()
@@ -153,28 +154,32 @@ public class PlayerBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Chalk"))
+        if (collision.gameObject.CompareTag("Chalk") && playerInventory.getPlayerInvertoryPivot(1) < 5)
         {
-            collision.gameObject.SetActive(false);
-            playerInventory.setChalkAmount(1);
+            collectedObject = collision.gameObject;
+            playerInventory.registerShootingObject(ref collectedObject, 1);
         }
 
-        if (collision.gameObject.CompareTag("Ruler"))
+        if (collision.gameObject.CompareTag("Ruler") && playerInventory.getPlayerInvertoryPivot(2) < 5)
         {
-            collision.gameObject.SetActive(false);
-            playerInventory.setRulerAmount(1);
+            collectedObject = collision.gameObject;
+            playerInventory.registerShootingObject(ref collectedObject, 2);
         }
 
-        if (collision.gameObject.CompareTag("Brush"))
+        if (collision.gameObject.CompareTag("Brush") && playerInventory.getPlayerInvertoryPivot(3) < 5)
         {
-            collision.gameObject.SetActive(false);
-            playerInventory.setBrushAmount(1);
+            collectedObject = collision.gameObject;
+            playerInventory.registerShootingObject(ref collectedObject, 3);
         }
     }
 
     private void shootObject()
     {
-        //shoot object
+        if(playerInventory.getPlayerInvertoryPivot(playerInventory.getPlayerInventoryObjectState()) > 0)
+        {
+            playerInventory.releaseShootingObject(ref currentShootingObject);
+
+        }
     }
 
     private void grabTargetObject()

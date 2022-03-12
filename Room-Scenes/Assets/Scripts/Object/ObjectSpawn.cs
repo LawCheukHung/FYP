@@ -8,58 +8,102 @@ public class ObjectSpawn : MonoBehaviour
     public GameObject chalkPrefab;
     public GameObject brushPrefab;
     public GameObject rulerPrefab;
-
-    private GameObject spawnObjectPrefab;
+    private GameObject spawnMissionObjectPrefab;
+    private GameObject spawnShootingObjectPrefab;
     private Vector3 spawnPos;
-    private float spawnTime = 8;
+    private float spawnMissionObjectTime = 10f;
+    private float spawnShootingObjectTime = 8f;
 
     void Update()
     {
-        countDownToSpawnObject();
+        countSpawnMissionObjectTime();
+        countSpawnShootingObjectTime();
     }
 
-    private void countDownToSpawnObject()
+    private void countSpawnMissionObjectTime()
     {
-        if (spawnTime <= 0)
+        if (spawnMissionObjectTime <= 0)
         {
-            spawnObject();
-            initSpawnTime();
+            spawnMissionObject();
+            initSpawnMissionObjectTime();
         }
         else
         {
-            spawnTime -= Time.deltaTime;
+            spawnMissionObjectTime -= Time.deltaTime;
         }
     }
 
-    private void initSpawnTime()
+    private void countSpawnShootingObjectTime()
     {
-        spawnTime = 8;
+        if (spawnShootingObjectTime <= 0)
+        {
+            spawnShootingObject();
+            initSpawnShootingObjectTime();
+        }
+        else
+        {
+            spawnShootingObjectTime -= Time.deltaTime;
+        }
     }
 
-    private void spawnObject()
+    private void initSpawnMissionObjectTime()
     {
-        randomSpawnObject();
+        spawnMissionObjectTime = 10f;
+    }
+
+    private void initSpawnShootingObjectTime()
+    {
+        spawnShootingObjectTime = 8f;
+    }
+
+    private void spawnMissionObject()
+    {
+        randomSpawnMissionObject();
         randomPosition();
-        Instantiate(spawnObjectPrefab, spawnPos, Quaternion.identity);
+        Instantiate(spawnMissionObjectPrefab, spawnPos, Quaternion.identity);
     }
 
-    private void randomSpawnObject()
+    private void spawnShootingObject()
+    {
+        randomSpawnShootingObject();
+        randomPosition();
+        Instantiate(spawnShootingObjectPrefab, spawnPos, Quaternion.identity);
+    }
+
+    private void randomSpawnShootingObject()
     {
         float randNum = Random.Range(0, 2);
 
         switch (randNum)
         {
             case 0:
-                spawnObjectPrefab = garbagePrefab;
+                spawnShootingObjectPrefab = chalkPrefab;
                 break;
             case 1:
-                spawnObjectPrefab = chalkPrefab;
+                spawnShootingObjectPrefab = brushPrefab;
                 break;
             case 2:
-                spawnObjectPrefab = brushPrefab;
+                spawnShootingObjectPrefab = rulerPrefab;
                 break;
-            case 3:
-                spawnObjectPrefab = rulerPrefab;
+            default:
+                break;
+        }
+    }
+
+    private void randomSpawnMissionObject()
+    {
+        float randNum = Random.Range(0, 2);
+
+        switch (randNum)
+        {
+            case 0:
+                spawnMissionObjectPrefab = garbagePrefab;
+                break;
+            case 1:
+                spawnMissionObjectPrefab = garbagePrefab;
+                break;
+            case 2:
+                spawnMissionObjectPrefab = garbagePrefab;
                 break;
             default:
                 break;
