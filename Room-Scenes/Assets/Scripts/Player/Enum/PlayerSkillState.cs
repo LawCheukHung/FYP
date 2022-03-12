@@ -1,5 +1,0 @@
-﻿enum PlayerSkillState
-{
-    teachingBoost,
-    allCoolDown
-}

@@ -8,7 +8,7 @@ public class PlayerBehavior : MonoBehaviour
     public Camera playerCam;
     public MainMission mainMission;
     public PlayerTools playerTools;
-    public PlayerShootItems playerShootItems;
+    public PlayerInventory playerInventory;
 
     private PlayerBehaviorState playerBehaviorState;
     private GameObject target;
@@ -25,8 +25,12 @@ public class PlayerBehavior : MonoBehaviour
 
     void Update()
     {
-        switchState();
+        listenPlayerBehaviorChange();
+        switchPlayerBehaviorState();
+    }
 
+    private void switchPlayerBehaviorState()
+    {
         switch (playerBehaviorState)
         {
             case PlayerBehaviorState.Catch:
@@ -43,7 +47,7 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-    private void switchState()
+    private void listenPlayerBehaviorChange()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -52,7 +56,7 @@ public class PlayerBehavior : MonoBehaviour
                 initPlayerState();
                 playerBehaviorState = PlayerBehaviorState.Teach;
                 playerTools.showObject();
-                playerShootItems.showShootItem();
+                //playerInventory.showShootItem();
                 Debug.Log("teach mode");
             }
         }
@@ -80,7 +84,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         playerBehaviorState = PlayerBehaviorState.Idle;
         playerTools.hideObject();
-        playerShootItems.hideShootItem();
+        //playerInventory.hideShootItem();
     }
 
     private void teaching()
@@ -151,20 +155,20 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Chalk"))
         {
-            gameObject.SetActive(false);
-            playerShootItems.setChalkAmount(1);
+            collision.gameObject.SetActive(false);
+            playerInventory.setChalkAmount(1);
         }
 
         if (collision.gameObject.CompareTag("Ruler"))
         {
-            gameObject.SetActive(false);
-            playerShootItems.setRulerAmount(1);
+            collision.gameObject.SetActive(false);
+            playerInventory.setRulerAmount(1);
         }
 
         if (collision.gameObject.CompareTag("Brush"))
         {
-            gameObject.SetActive(false);
-            playerShootItems.setBrushAmount(1);
+            collision.gameObject.SetActive(false);
+            playerInventory.setBrushAmount(1);
         }
     }
 
@@ -177,7 +181,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (!isHoldingObject)
         {
-            targetObject.grabObject(transform);
+            targetObject.grabObject(playerCam.transform);
             isHoldingObject = true;
         }
     }
@@ -193,7 +197,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void catchTargetStudent()
     {
-        if (targetStudent.getStudentState() == 0)
+        if (targetStudent.getStudentState() != 0)
         {
             targetStudent.initStudentState();
             mainMission.changeBadStudentAmount(-1);

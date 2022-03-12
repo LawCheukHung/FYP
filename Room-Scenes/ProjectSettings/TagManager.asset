@@ -12,6 +12,7 @@ TagManager:
   - Chalk
   - Ruler
   - Brush
+  - StudentController
   layers:
   - Default
   - TransparentFX

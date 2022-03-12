@@ -6,26 +6,21 @@ public class PlayerSkill : MonoBehaviour
 {
     public MainMission mainMission;
     public StudentControl studentControl;
-
-    private PlayerSkillState playerSkillState;
-    private float allCoolDownCountTime = 5f;
-    private float teachingBoostCountTime = 3f;
+    private float allCoolDownCountTime = 50f;
+    private float teachingBoostCountTime = 30f;
+    private float teachingBoostDuration = 8f;
     private bool isAllCoolDownTriggered = false;
     private bool isTeachingBoostTriggered = false;
-
-    void Start()
-    {
-        playerSkillState = PlayerSkillState.teachingBoost;
-    }
+    private bool isCountingTeachingBoostDuration = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && teachingBoostCountTime <= 0)
+        if (Input.GetKeyDown(KeyCode.F) && !isTeachingBoostTriggered)
         {
             teachingBoost();
         }
 
-        if (Input.GetKeyDown(KeyCode.G) && allCoolDownCountTime <= 0)
+        if (Input.GetKeyDown(KeyCode.G) && !isAllCoolDownTriggered)
         {
             allCoolDown();
         }
@@ -39,6 +34,11 @@ public class PlayerSkill : MonoBehaviour
         {
             countAllCoolDownTime();
         }
+
+        if(isCountingTeachingBoostDuration)
+        {
+            countTeachingBoostDuration();
+        }
     }
 
     private void allCoolDown()
@@ -51,6 +51,21 @@ public class PlayerSkill : MonoBehaviour
     {
         mainMission.boostTeachingProgress(3f);
         isTeachingBoostTriggered = true;
+        isCountingTeachingBoostDuration = true;
+    }
+
+    private void countTeachingBoostDuration()
+    {
+        if (teachingBoostDuration > 0)
+        {
+            teachingBoostDuration -= Time.deltaTime;
+        }
+        else
+        {
+            mainMission.boostTeachingProgress(1f);
+            teachingBoostDuration = 8f;
+            isCountingTeachingBoostDuration = false;
+        }
     }
 
     private void countAllCoolDownTime()
@@ -62,7 +77,7 @@ public class PlayerSkill : MonoBehaviour
         else
         {
             isAllCoolDownTriggered = false;
-            initAllCoolDownCountTime();
+            allCoolDownCountTime = 50f;
         }
     }
 
@@ -75,17 +90,7 @@ public class PlayerSkill : MonoBehaviour
         else
         {
             isTeachingBoostTriggered = false;
-            initTeachingBoostCountTime();
+            teachingBoostCountTime = 30f;
         }
-    }
-
-    private void initAllCoolDownCountTime()
-    {
-        allCoolDownCountTime = 5f;
-    }
-
-    private void initTeachingBoostCountTime()
-    {
-        teachingBoostCountTime = 3f;
     }
 }

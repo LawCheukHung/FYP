@@ -16,4 +16,9 @@ public class StudentSpawn : MonoBehaviour
             student.name = "Student" + i;
         }
     }
+
+    public int getTotalStudentSeatPos()
+    {
+        return studentSeatPos.Length;
+    }
 }
