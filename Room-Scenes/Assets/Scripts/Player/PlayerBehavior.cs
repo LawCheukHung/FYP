@@ -6,94 +6,89 @@ using UnityEngine.UI;
 public class PlayerBehavior : MonoBehaviour
 {
     public Camera playerCam;
-    public GameObject teacherBook;
     public MainMission mainMission;
-    private GameObject currentGrabingObject;
-    private GameObject currentCatchingStudent;
-    private ObjectCollision grabbingObject;
-    private StudentBehavior catchingStudent;
-    private PlayerState playerState;
-    private float aimingDistance = 1f;
-    private float aimingRadius = 0.1f;
+    public PlayerTools playerTools;
+    public PlayerInventory playerInventory;
+    private PlayerBehaviorState playerBehaviorState;
+    private GameObject currentShootingObject;
+    private GameObject collectedObject;
+    private GameObject target;
+    private ObjectBehavior targetObject;
+    private StudentBehavior targetStudent;
     private bool isHoldingObject = false;
     private bool isAfterTeaching = false;
 
     void Start()
     {
-        playerState = PlayerState.Idle;
+        playerBehaviorState = PlayerBehaviorState.Idle;
         Debug.Log("idle mode");
     }
 
     void Update()
     {
-        switchState();
+        listenPlayerBehaviorChange();
+        switchPlayerBehaviorState();
+    }
 
-        switch (playerState)
+    private void switchPlayerBehaviorState()
+    {
+        switch (playerBehaviorState)
         {
-            case PlayerState.Catch:
-                catchStudent();
+            case PlayerBehaviorState.Catch:
+                catching();
                 break;
-            case PlayerState.Teach:
-                teachStudent();
+            case PlayerBehaviorState.Teach:
+                teaching();
                 break;
-            case PlayerState.Idle:
-                collectObject();
+            case PlayerBehaviorState.Idle:
+                picking();
                 break;
             default:
                 break;
         }
     }
 
-    private void switchState()
+    private void listenPlayerBehaviorChange()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (playerState == PlayerState.Teach)
+            if(playerBehaviorState != PlayerBehaviorState.Teach)
             {
                 initPlayerState();
-                Debug.Log("idle mode");
-            }
-            else
-            {
-                initPlayerState();
-                teacherBook.SetActive(true);
-                playerState = PlayerState.Teach;
+                playerBehaviorState = PlayerBehaviorState.Teach;
+                playerTools.showObject();
+                playerInventory.setIsShowObject(true);
                 Debug.Log("teach mode");
             }
         }
-        else if (Input.GetKeyDown(KeyCode.C))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (playerState == PlayerState.Catch)
+            if (playerBehaviorState != PlayerBehaviorState.Catch)
             {
                 initPlayerState();
-                Debug.Log("idle mode");
-            }
-            else
-            {
-                initPlayerState();
-                playerState = PlayerState.Catch;
+                playerBehaviorState = PlayerBehaviorState.Catch;
                 Debug.Log("catch mode");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (playerBehaviorState != PlayerBehaviorState.Idle)
+            {
+                initPlayerState();
+                playerBehaviorState = PlayerBehaviorState.Idle;
+                Debug.Log("idle mode");
             }
         }
     }
 
     private void initPlayerState()
     {
-        playerState = PlayerState.Idle;
-        teacherBook.SetActive(false);
-        mainMission.setIsTeaching(false);
-        dropObject();
+        playerBehaviorState = PlayerBehaviorState.Idle;
+        playerTools.hideObject();
+        playerInventory.setIsShowObject(false);
     }
 
-    private void catchStudent()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            shootRaycast();
-        }
-    }
-
-    private void teachStudent()
+    private void teaching()
     {
         if (Input.GetMouseButton(0))
         {
@@ -108,17 +103,30 @@ public class PlayerBehavior : MonoBehaviour
                 isAfterTeaching = false;
             }
         }
+
+        if(Input.GetMouseButton(1) && !isAfterTeaching)
+        {
+            shootObject();
+        }
     }
 
-    private void collectObject()
+    private void catching()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             shootRaycast();
         }
-        else if (Input.GetMouseButtonDown(1))
+    }
+
+    private void picking()
+    {
+        if (Input.GetMouseButton(0))
         {
-            dropObject();
+            shootRaycast();
+        }
+        else if (Input.GetMouseButton(1))
+        {
+            dropTargetObject();
         }
     }
 
@@ -126,56 +134,77 @@ public class PlayerBehavior : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.SphereCast(playerCam.transform.position, aimingRadius, playerCam.transform.forward, out hit, aimingDistance))
+        if (Physics.SphereCast(playerCam.transform.position, 0.1f, playerCam.transform.forward, out hit, 1f))
         {
-            if (hit.collider.tag == "Garbage" && playerState == PlayerState.Idle)
+            if (hit.collider.tag == "Garbage" && playerBehaviorState == PlayerBehaviorState.Idle)
             {
-                currentGrabingObject = hit.transform.gameObject;
-                grabbingObject = currentGrabingObject.GetComponent<ObjectCollision>();
-                grabObject();
+                target = hit.transform.gameObject;
+                targetObject = target.GetComponent<ObjectBehavior>();
+                grabTargetObject();
             }
 
-            if (hit.collider.tag == "Student" && playerState == PlayerState.Catch)
+            if (hit.collider.tag == "Student" && playerBehaviorState == PlayerBehaviorState.Catch)
             {
-                currentCatchingStudent = hit.transform.gameObject;
-                catchingStudent = currentCatchingStudent.GetComponent<StudentBehavior>();
+                target = hit.transform.gameObject;
+                targetStudent = target.GetComponent<StudentBehavior>();
                 catchTargetStudent();
             }
         }
     }
 
-    private void grabObject()
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Chalk") && playerInventory.getPlayerInvertoryPivot(1) < 5)
+        {
+            collectedObject = collision.gameObject;
+            playerInventory.registerShootingObject(ref collectedObject, 1);
+        }
+
+        if (collision.gameObject.CompareTag("Ruler") && playerInventory.getPlayerInvertoryPivot(2) < 5)
+        {
+            collectedObject = collision.gameObject;
+            playerInventory.registerShootingObject(ref collectedObject, 2);
+        }
+
+        if (collision.gameObject.CompareTag("Brush") && playerInventory.getPlayerInvertoryPivot(3) < 5)
+        {
+            collectedObject = collision.gameObject;
+            playerInventory.registerShootingObject(ref collectedObject, 3);
+        }
+    }
+
+    private void shootObject()
+    {
+        if(playerInventory.getPlayerInvertoryPivot(playerInventory.getPlayerInventoryObjectState()) > 0)
+        {
+            playerInventory.releaseShootingObject(ref currentShootingObject);
+            //give currentShootingObject a force
+        }
+    }
+
+    private void grabTargetObject()
     {
         if (!isHoldingObject)
         {
-            Debug.Log("idle mode & grabbing an object");
-            currentGrabingObject.transform.SetParent(playerCam.transform);
-            grabbingObject.setIsHolding(true);
+            targetObject.grabObject(playerCam.transform);
             isHoldingObject = true;
         }
     }
 
-    private void dropObject()
+    public void dropTargetObject()
     {
         if (isHoldingObject)
         {
-            Debug.Log("idle mode & drop the object");
-            currentGrabingObject.transform.SetParent(null);
-            grabbingObject.setIsHolding(false);
+            targetObject.dropObject();
             isHoldingObject = false;
         }
     }
 
-    public void lostObject()
-    {
-        dropObject();
-    }
-
     private void catchTargetStudent()
     {
-        if (catchingStudent.getIsBadBehavingValue())
+        if (targetStudent.getStudentState() != 0)
         {
-            catchingStudent.initStudentState();
+            targetStudent.initStudentState();
             mainMission.changeBadStudentAmount(-1);
         }
     }
@@ -184,6 +213,6 @@ public class PlayerBehavior : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(playerCam.transform.position + playerCam.transform.forward * aimingDistance, aimingRadius);
+        Gizmos.DrawWireSphere(playerCam.transform.position + playerCam.transform.forward * 1f, 0.1f);
     }
 }

@@ -1,8 +1,8 @@
 ﻿public enum StudentState
 {
+    Nice,
     Sleep,
     Play,
     Cheat,
-    Yell,
-    Nice
+    Yell
 }

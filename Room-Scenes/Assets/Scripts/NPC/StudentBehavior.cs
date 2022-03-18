@@ -8,7 +8,6 @@ public class StudentBehavior : MonoBehaviour
     private MainMission mainMission;
     private float badValue;
     private float mentalValue;
-    private bool isBadBehaving;
 
     void Start()
     {
@@ -21,7 +20,7 @@ public class StudentBehavior : MonoBehaviour
     {
         if(mentalValue <= 0)
         {
-            if(!isBadBehaving)
+            if(studentState != StudentState.Nice)
                 changeStudentState();
         }
         else
@@ -33,7 +32,6 @@ public class StudentBehavior : MonoBehaviour
     public void initStudentState()
     {
         studentState = StudentState.Nice;
-        isBadBehaving = false;
         mentalValue = Random.Range(80f, 100f);
     }
 
@@ -44,14 +42,13 @@ public class StudentBehavior : MonoBehaviour
 
     private void changeStudentState()
     {
-        studentState = (StudentState)((int)Random.Range(0, 3));
-        isBadBehaving = true;
+        studentState = (StudentState)((int)Random.Range(1, 3));
         mainMission.changeBadStudentAmount(1);
     }
 
-    public bool getIsBadBehavingValue()
+    public int getStudentState()
     {
-        return isBadBehaving;
+        return (int)studentState;
     }
 
     public float getMentalValue()

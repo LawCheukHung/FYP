@@ -1,4 +1,4 @@
-﻿enum PlayerState
+﻿enum PlayerBehaviorState
 {
     Teach,
     Catch,

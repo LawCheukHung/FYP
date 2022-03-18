@@ -56,7 +56,7 @@ public class EndGameUI : MonoBehaviour
     private void countTotalScore()
     {
         mainMissionScore = mainMission.getTeachingProgress();
-        sideMissionScore = collectGarbageMission.getTotalCollectGarbage();
+        sideMissionScore = collectGarbageMission.getcollectAmount();
         totalScore = mainMissionScore + sideMissionScore;
     }
 

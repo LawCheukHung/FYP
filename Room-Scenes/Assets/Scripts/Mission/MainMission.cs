@@ -6,8 +6,9 @@ public class MainMission : MonoBehaviour
 {
     public GamingUI gamingUI;
     public EndGameUI endGameUI;
-    private float timer = 3f;
+    private float timer = 180f;
     private float teachingProgress = 100f;
+    private float boostingMultiply = 1f;
     private bool isTeaching = false;
     private int badStudentAmount = 0;
 
@@ -35,7 +36,7 @@ public class MainMission : MonoBehaviour
         {
             if(teachingProgress < 100)
             {
-                teachingProgress += Time.deltaTime;
+                teachingProgress += boostingMultiply * Time.deltaTime;
             }
         }
         else
@@ -45,6 +46,11 @@ public class MainMission : MonoBehaviour
                 teachingProgress -= Time.deltaTime;
             }
         }
+    }
+
+    public void boostTeachingProgress(float acceleration)
+    {
+        boostingMultiply = acceleration;
     }
 
     public void setIsTeaching(bool currentState)
@@ -57,6 +63,7 @@ public class MainMission : MonoBehaviour
         badStudentAmount += changeAmount;
     }
 
+    //for counting final score
     public float getTeachingProgress()
     {
         return teachingProgress;
