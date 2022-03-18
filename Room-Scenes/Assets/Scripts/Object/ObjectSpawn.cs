@@ -6,8 +6,8 @@ public class ObjectSpawn : MonoBehaviour
 {
     public GameObject garbagePrefab;
     public GameObject chalkPrefab;
-    public GameObject brushPrefab;
     public GameObject rulerPrefab;
+    public GameObject brushPrefab;
     private GameObject spawnMissionObjectPrefab;
     private GameObject spawnShootingObjectPrefab;
     private Vector3 spawnPos;
@@ -72,7 +72,7 @@ public class ObjectSpawn : MonoBehaviour
 
     private void randomSpawnShootingObject()
     {
-        float randNum = Random.Range(0, 2);
+        int randNum = Random.Range(0, 3);
 
         switch (randNum)
         {
@@ -80,10 +80,10 @@ public class ObjectSpawn : MonoBehaviour
                 spawnShootingObjectPrefab = chalkPrefab;
                 break;
             case 1:
-                spawnShootingObjectPrefab = brushPrefab;
+                spawnShootingObjectPrefab = rulerPrefab;
                 break;
             case 2:
-                spawnShootingObjectPrefab = rulerPrefab;
+                spawnShootingObjectPrefab = brushPrefab;
                 break;
             default:
                 break;
@@ -92,7 +92,7 @@ public class ObjectSpawn : MonoBehaviour
 
     private void randomSpawnMissionObject()
     {
-        float randNum = Random.Range(0, 2);
+        int randNum = Random.Range(0, 3);
 
         switch (randNum)
         {

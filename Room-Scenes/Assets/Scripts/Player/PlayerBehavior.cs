@@ -57,7 +57,7 @@ public class PlayerBehavior : MonoBehaviour
                 initPlayerState();
                 playerBehaviorState = PlayerBehaviorState.Teach;
                 playerTools.showObject();
-                playerInventory.showShootItem();
+                playerInventory.setIsShowObject(true);
                 Debug.Log("teach mode");
             }
         }
@@ -85,7 +85,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         playerBehaviorState = PlayerBehaviorState.Idle;
         playerTools.hideObject();
-        playerInventory.hideShootItem();
+        playerInventory.setIsShowObject(false);
     }
 
     private void teaching()
@@ -178,7 +178,7 @@ public class PlayerBehavior : MonoBehaviour
         if(playerInventory.getPlayerInvertoryPivot(playerInventory.getPlayerInventoryObjectState()) > 0)
         {
             playerInventory.releaseShootingObject(ref currentShootingObject);
-
+            //give currentShootingObject a force
         }
     }
 

@@ -14,6 +14,7 @@ public class PlayerInventory : MonoBehaviour
     private int chalkPivot = 0;
     private int rulerPivot = 0;
     private int brushPivot = 0;
+    private bool isShowObject = false;
 
     void Start()
     {
@@ -26,6 +27,15 @@ public class PlayerInventory : MonoBehaviour
     void Update()
     {
         listenPlayerInventoryChange();
+
+        if (isShowObject)
+        {
+            showShootItem();
+        }
+        else
+        {
+            hideAllShootItem();
+        }
     }
 
     private void listenPlayerInventoryChange()
@@ -50,31 +60,36 @@ public class PlayerInventory : MonoBehaviour
     {
         if (playerInventoryObjectState == PlayerInventoryObjectState.Chalk && chalkPivot > 0)
         {
-            hideShootItem();
+            hideAllShootItem();
             chalk.SetActive(true);
         }
         else if (playerInventoryObjectState == PlayerInventoryObjectState.Ruler && rulerPivot > 0)
         {
-            hideShootItem();
+            hideAllShootItem();
             ruler.SetActive(true);
         }
         else if (playerInventoryObjectState == PlayerInventoryObjectState.Brush && brushPivot > 0)
         {
-            hideShootItem();
+            hideAllShootItem();
             brush.SetActive(true);
         }
         else
         {
-            hideShootItem();
+            hideAllShootItem();
             playerInventoryObjectState = PlayerInventoryObjectState.Null;
         }
     }
 
-    public void hideShootItem()
+    public void hideAllShootItem()
     {
         chalk.SetActive(false);
         ruler.SetActive(false);
         brush.SetActive(false);
+    }
+
+    public void setIsShowObject(bool showState)
+    {
+        isShowObject = showState;
     }
 
     public int getPlayerInventoryObjectState()
@@ -82,38 +97,38 @@ public class PlayerInventory : MonoBehaviour
         return (int)playerInventoryObjectState;
     }
 
-    public int getPlayerInvertoryPivot(int state)
+    public int getPlayerInvertoryPivot(int objectType)
     {
-        switch ((PlayerInventoryObjectState)state)
+        switch (objectType)
         {
-            case PlayerInventoryObjectState.Chalk:
+            case 1:
                 return chalkPivot;
-            case PlayerInventoryObjectState.Ruler:
+            case 2:
                 return rulerPivot;
-            case PlayerInventoryObjectState.Brush:
+            case 3:
                 return brushPivot;
             default:
                 return 0;
         }
     }
 
-    public void registerShootingObject(ref GameObject shootingObject, int objectType)
+    public void registerShootingObject(ref GameObject registerObject, int objectType)
     {
         switch (objectType)
         {
             case 1:
-                chalkArr[chalkPivot] = shootingObject;
-                shootingObject.SetActive(false);
+                chalkArr[chalkPivot] = registerObject;
+                registerObject.SetActive(false);
                 chalkPivot++;
                 break;
             case 2:
-                rulerArr[rulerPivot] = shootingObject;
-                shootingObject.SetActive(false);
+                rulerArr[rulerPivot] = registerObject;
+                registerObject.SetActive(false);
                 rulerPivot++;
                 break;
             case 3:
-                brushArr[brushPivot] = shootingObject;
-                shootingObject.SetActive(false);
+                brushArr[brushPivot] = registerObject;
+                registerObject.SetActive(false);
                 brushPivot++;
                 break;
             default:
