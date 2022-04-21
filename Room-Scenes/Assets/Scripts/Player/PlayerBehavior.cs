@@ -10,28 +10,26 @@ public class PlayerBehavior : MonoBehaviour
     public PlayerTools playerTools;
     public PlayerInventory playerInventory;
     private PlayerBehaviorState playerBehaviorState;
+    private ShootObjectState shootObjectState;
     private GameObject currentShootingObject;
     private GameObject collectedObject;
     private GameObject target;
     private ObjectBehavior targetObject;
     private StudentBehavior targetStudent;
-    private bool isHoldingObject = false;
-    private bool isAfterTeaching = false;
+    private bool isTeaching;
+    private bool isHoldingObject;
 
     void Start()
     {
+        isTeaching = false;
+        isHoldingObject = false;
         playerBehaviorState = PlayerBehaviorState.Idle;
-        Debug.Log("idle mode");
     }
 
     void Update()
     {
-        listenPlayerBehaviorChange();
-        switchPlayerBehaviorState();
-    }
+        changePlayerBehavior();
 
-    private void switchPlayerBehaviorState()
-    {
         switch (playerBehaviorState)
         {
             case PlayerBehaviorState.Catch:
@@ -43,12 +41,10 @@ public class PlayerBehavior : MonoBehaviour
             case PlayerBehaviorState.Idle:
                 picking();
                 break;
-            default:
-                break;
         }
     }
 
-    private void listenPlayerBehaviorChange()
+    private void changePlayerBehavior()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -56,9 +52,6 @@ public class PlayerBehavior : MonoBehaviour
             {
                 initPlayerState();
                 playerBehaviorState = PlayerBehaviorState.Teach;
-                playerTools.showObject();
-                playerInventory.setIsShowObject(true);
-                Debug.Log("teach mode");
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -67,44 +60,38 @@ public class PlayerBehavior : MonoBehaviour
             {
                 initPlayerState();
                 playerBehaviorState = PlayerBehaviorState.Catch;
-                Debug.Log("catch mode");
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (playerBehaviorState != PlayerBehaviorState.Idle)
-            {
-                initPlayerState();
-                playerBehaviorState = PlayerBehaviorState.Idle;
-                Debug.Log("idle mode");
-            }
+            initPlayerState();
         }
     }
 
     private void initPlayerState()
     {
-        playerBehaviorState = PlayerBehaviorState.Idle;
         playerTools.hideObject();
-        playerInventory.setIsShowObject(false);
+        playerInventory.hideObject();
+        playerBehaviorState = PlayerBehaviorState.Idle;
     }
 
     private void teaching()
     {
+        playerTools.showObject();
+        playerInventory.showObject();
+
         if (Input.GetMouseButton(0))
         {
             mainMission.setIsTeaching(true);
-            isAfterTeaching = true;
+            isTeaching = true;
         }
         else
         {
-            if (isAfterTeaching)
-            {
-                mainMission.setIsTeaching(false);
-                isAfterTeaching = false;
-            }
+            mainMission.setIsTeaching(false);
+            isTeaching = false;
         }
 
-        if(Input.GetMouseButton(1) && !isAfterTeaching)
+        if (Input.GetMouseButton(1) && !isTeaching)
         {
             shootObject();
         }
@@ -154,31 +141,33 @@ public class PlayerBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Chalk") && playerInventory.getPlayerInvertoryPivot(1) < 5)
+        if (collision.gameObject.CompareTag("ChalkItem") && playerInventory.checkArrPivot(0) < 4)
         {
-            collectedObject = collision.gameObject;
-            playerInventory.registerShootingObject(ref collectedObject, 1);
+            collision.gameObject.SetActive(false);
+            playerInventory.registerShootObject(0);
         }
 
-        if (collision.gameObject.CompareTag("Ruler") && playerInventory.getPlayerInvertoryPivot(2) < 5)
+        if (collision.gameObject.CompareTag("RulerItem") && playerInventory.checkArrPivot(1) < 4)
         {
-            collectedObject = collision.gameObject;
-            playerInventory.registerShootingObject(ref collectedObject, 2);
+            collision.gameObject.SetActive(false);
+            playerInventory.registerShootObject(1);
         }
 
-        if (collision.gameObject.CompareTag("Brush") && playerInventory.getPlayerInvertoryPivot(3) < 5)
+        if (collision.gameObject.CompareTag("BrushItem") && playerInventory.checkArrPivot(2) < 4)
         {
-            collectedObject = collision.gameObject;
-            playerInventory.registerShootingObject(ref collectedObject, 3);
+            collision.gameObject.SetActive(false);
+            playerInventory.registerShootObject(2);
         }
     }
 
     private void shootObject()
     {
-        if(playerInventory.getPlayerInvertoryPivot(playerInventory.getPlayerInventoryObjectState()) > 0)
+        currentShootingObject = playerInventory.releaseShootObject();
+
+        if (currentShootingObject != null)
         {
-            playerInventory.releaseShootingObject(ref currentShootingObject);
-            //give currentShootingObject a force
+            currentShootingObject.GetComponent<ShootObjectBehavior>().setIsShoot();
+            // give force to currentShootingObject
         }
     }
 

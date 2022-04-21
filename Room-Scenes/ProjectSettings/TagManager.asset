@@ -9,10 +9,9 @@ TagManager:
   - Environment
   - Mission
   - GarbageBin
-  - Chalk
-  - Ruler
-  - Brush
-  - StudentController
+  - ChalkItem
+  - RulerItem
+  - BrushItem
   layers:
   - Default
   - TransparentFX

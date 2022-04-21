@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class ObjectSpawn : MonoBehaviour
 {
-    public GameObject garbagePrefab;
-    public GameObject chalkPrefab;
-    public GameObject rulerPrefab;
-    public GameObject brushPrefab;
-    private GameObject spawnMissionObjectPrefab;
-    private GameObject spawnShootingObjectPrefab;
+    public GameObject[] missionObjects;
+    public GameObject[] collectiveObjects;
     private Vector3 spawnPos;
     private float spawnMissionObjectTime = 10f;
-    private float spawnShootingObjectTime = 8f;
+    private float spawnCollectiveObjectTime = 8f;
+    private float currentSpawnMissionObjectTime = 0f;
+    private float currentSpawnCollectiveObjectTime = 0f;
+
+    void Start()
+    {
+        currentSpawnMissionObjectTime = spawnMissionObjectTime;
+        currentSpawnCollectiveObjectTime = spawnCollectiveObjectTime;
+    }
 
     void Update()
     {
@@ -22,92 +26,45 @@ public class ObjectSpawn : MonoBehaviour
 
     private void countSpawnMissionObjectTime()
     {
-        if (spawnMissionObjectTime <= 0)
+        if (currentSpawnMissionObjectTime <= 0)
         {
             spawnMissionObject();
-            initSpawnMissionObjectTime();
+            currentSpawnMissionObjectTime = spawnMissionObjectTime;
         }
         else
         {
-            spawnMissionObjectTime -= Time.deltaTime;
+            currentSpawnMissionObjectTime -= Time.deltaTime;
         }
     }
 
     private void countSpawnShootingObjectTime()
     {
-        if (spawnShootingObjectTime <= 0)
+        if (currentSpawnCollectiveObjectTime <= 0)
         {
-            spawnShootingObject();
-            initSpawnShootingObjectTime();
+            spawnCollectiveObject();
+            currentSpawnCollectiveObjectTime = spawnCollectiveObjectTime;
         }
         else
         {
-            spawnShootingObjectTime -= Time.deltaTime;
+            currentSpawnCollectiveObjectTime -= Time.deltaTime;
         }
-    }
-
-    private void initSpawnMissionObjectTime()
-    {
-        spawnMissionObjectTime = 10f;
-    }
-
-    private void initSpawnShootingObjectTime()
-    {
-        spawnShootingObjectTime = 8f;
     }
 
     private void spawnMissionObject()
     {
-        randomSpawnMissionObject();
         randomPosition();
-        Instantiate(spawnMissionObjectPrefab, spawnPos, Quaternion.identity);
+        Instantiate(missionObjects[randomSpawnObjectState(0, 3)], spawnPos, Quaternion.identity);
     }
 
-    private void spawnShootingObject()
+    private void spawnCollectiveObject()
     {
-        randomSpawnShootingObject();
         randomPosition();
-        Instantiate(spawnShootingObjectPrefab, spawnPos, Quaternion.identity);
+        Instantiate(collectiveObjects[randomSpawnObjectState(0, 3)], spawnPos, Quaternion.identity);
     }
 
-    private void randomSpawnShootingObject()
+    private int randomSpawnObjectState(int min, int max)
     {
-        int randNum = Random.Range(0, 3);
-
-        switch (randNum)
-        {
-            case 0:
-                spawnShootingObjectPrefab = chalkPrefab;
-                break;
-            case 1:
-                spawnShootingObjectPrefab = rulerPrefab;
-                break;
-            case 2:
-                spawnShootingObjectPrefab = brushPrefab;
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void randomSpawnMissionObject()
-    {
-        int randNum = Random.Range(0, 3);
-
-        switch (randNum)
-        {
-            case 0:
-                spawnMissionObjectPrefab = garbagePrefab;
-                break;
-            case 1:
-                spawnMissionObjectPrefab = garbagePrefab;
-                break;
-            case 2:
-                spawnMissionObjectPrefab = garbagePrefab;
-                break;
-            default:
-                break;
-        }
+        return Random.Range(min, max);
     }
 
     private void randomPosition()

@@ -6,19 +6,28 @@ public class MainMission : MonoBehaviour
 {
     public GamingUI gamingUI;
     public EndGameUI endGameUI;
-    private float timer = 180f;
-    private float teachingProgress = 100f;
-    private float boostingMultiply = 1f;
-    private bool isTeaching = false;
-    private int badStudentAmount = 0;
+    private float timer;
+    private float teachingProgress;
+    private float boostingMultiply;
+    private bool isTeaching;
+    private int badStudentAmount;
+
+    void Start()
+    {
+        timer = 180f;
+        teachingProgress = 100f;
+        boostingMultiply = 1f;
+        isTeaching = false;
+        badStudentAmount = 0;
+    }
 
     void Update()
     {
-        checkMainMission();
-        changeTeachingProgress();
+        mainMissionCountDown();
+        teachingProgressCountDown();
     }
 
-    private void checkMainMission()
+    private void mainMissionCountDown()
     {
         if (timer <= 0 || teachingProgress <= 0)
         {
@@ -30,9 +39,9 @@ public class MainMission : MonoBehaviour
         }
     }
 
-    private void changeTeachingProgress()
+    private void teachingProgressCountDown()
     {
-        if (isTeaching && badStudentAmount <= 0)
+        if (badStudentAmount >= 0 && isTeaching)
         {
             if(teachingProgress < 100)
             {
@@ -41,10 +50,7 @@ public class MainMission : MonoBehaviour
         }
         else
         {
-            if(teachingProgress > 0)
-            {
-                teachingProgress -= Time.deltaTime;
-            }
+            teachingProgress -= Time.deltaTime;
         }
     }
 
@@ -53,9 +59,9 @@ public class MainMission : MonoBehaviour
         boostingMultiply = acceleration;
     }
 
-    public void setIsTeaching(bool currentState)
+    public void setIsTeaching(bool value)
     {
-        isTeaching = currentState;
+        isTeaching = value;
     }
 
     public void changeBadStudentAmount(int changeAmount)

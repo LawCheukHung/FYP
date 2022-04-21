@@ -1,6 +1,6 @@
 ﻿enum PlayerBehaviorState
 {
+    Idle,
     Teach,
-    Catch,
-    Idle
+    Catch
 }

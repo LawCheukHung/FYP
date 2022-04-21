@@ -4,162 +4,142 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public GameObject chalk;
-    public GameObject ruler;
-    public GameObject brush;
-    private PlayerInventoryObjectState playerInventoryObjectState;
-    private GameObject[] chalkArr;
-    private GameObject[] rulerArr;
-    private GameObject[] brushArr;
-    private int chalkPivot = 0;
-    private int rulerPivot = 0;
-    private int brushPivot = 0;
-    private bool isShowObject = false;
+    public Transform rightHandPos;
+    public ShootObjectControlSystem shootObjectControlSystem;
+    private ShootObjectState shootObjectState;
+    private GameObject[,] shootObjectArr;
+    private GameObject currentOnHandShootObject;
 
     void Start()
     {
-        chalkArr = new GameObject[5];
-        rulerArr = new GameObject[5];
-        brushArr = new GameObject[5];
-        playerInventoryObjectState = PlayerInventoryObjectState.Null;
+        shootObjectArr = new GameObject[3, 5];
+        shootObjectState = ShootObjectState.Null;
     }
 
     void Update()
     {
         listenPlayerInventoryChange();
-
-        if (isShowObject)
-        {
-            showShootItem();
-        }
-        else
-        {
-            hideAllShootItem();
-        }
     }
 
     private void listenPlayerInventoryChange()
     {
         if (Input.GetKey(KeyCode.Keypad1))
         {
-            playerInventoryObjectState = PlayerInventoryObjectState.Chalk;
+            shootObjectState = ShootObjectState.Chalk;
         }
 
         if (Input.GetKey(KeyCode.Keypad2))
         {
-            playerInventoryObjectState = PlayerInventoryObjectState.Ruler;
+            shootObjectState = ShootObjectState.Ruler;
         }
 
         if (Input.GetKey(KeyCode.Keypad3))
         {
-            playerInventoryObjectState = PlayerInventoryObjectState.Brush;
+            shootObjectState = ShootObjectState.Brush;
         }
     }
 
-    public void showShootItem()
+    public void showObject()
     {
-        if (playerInventoryObjectState == PlayerInventoryObjectState.Chalk && chalkPivot > 0)
+        hideObject();
+
+        if (shootObjectState == ShootObjectState.Chalk && checkArrPivot(0) >= 0)
         {
-            hideAllShootItem();
-            chalk.SetActive(true);
+            currentOnHandShootObject = shootObjectArr[0, checkArrPivot(0)];
+            currentOnHandShootObject.SetActive(true);
         }
-        else if (playerInventoryObjectState == PlayerInventoryObjectState.Ruler && rulerPivot > 0)
+        else if (shootObjectState == ShootObjectState.Ruler && checkArrPivot(1) >= 0)
         {
-            hideAllShootItem();
-            ruler.SetActive(true);
+            currentOnHandShootObject = shootObjectArr[1, checkArrPivot(1)];
+            currentOnHandShootObject.SetActive(true);
         }
-        else if (playerInventoryObjectState == PlayerInventoryObjectState.Brush && brushPivot > 0)
+        else if (shootObjectState == ShootObjectState.Brush && checkArrPivot(2) >= 0)
         {
-            hideAllShootItem();
-            brush.SetActive(true);
+            currentOnHandShootObject = shootObjectArr[2, checkArrPivot(2)];
+            currentOnHandShootObject.SetActive(true);
         }
         else
         {
-            hideAllShootItem();
-            playerInventoryObjectState = PlayerInventoryObjectState.Null;
+            shootObjectState = ShootObjectState.Null;
+            currentOnHandShootObject = null;
+            hideObject();
         }
     }
 
-    public void hideAllShootItem()
+    public void hideObject()
     {
-        chalk.SetActive(false);
-        ruler.SetActive(false);
-        brush.SetActive(false);
-    }
-
-    public void setIsShowObject(bool showState)
-    {
-        isShowObject = showState;
-    }
-
-    public int getPlayerInventoryObjectState()
-    {
-        return (int)playerInventoryObjectState;
-    }
-
-    public int getPlayerInvertoryPivot(int objectType)
-    {
-        switch (objectType)
+        if(currentOnHandShootObject != null)
         {
+            currentOnHandShootObject.SetActive(false);
+        }
+    }
+
+    public int checkArrPivot(int shootObjectState)
+    {
+        int pivot = -1;
+
+        for (int i = 4; i >= 0; i--)
+        {
+            if (shootObjectArr[shootObjectState, i] != null)
+            {
+                pivot = i;
+                return pivot;
+            }
+        }
+
+        return pivot;
+    }
+
+    public int getShootObjectState()
+    {
+        return (int)shootObjectState;
+    }
+
+    public void registerShootObject(int collectObjectState)
+    {
+        int arrIndex;
+
+        switch (collectObjectState)
+        {
+            case 0:
+                arrIndex = checkArrPivot(0) + 1;
+                shootObjectArr[0, arrIndex] = shootObjectControlSystem.releaseShootObject(0);
+                shootObjectArr[0, arrIndex].transform.position = rightHandPos.position;
+                shootObjectArr[0, arrIndex].transform.SetParent(rightHandPos);
+                break;
             case 1:
-                return chalkPivot;
+                arrIndex = checkArrPivot(1) + 1;
+                shootObjectArr[1, arrIndex] = shootObjectControlSystem.releaseShootObject(1);
+                shootObjectArr[1, arrIndex].transform.position = rightHandPos.position;
+                shootObjectArr[1, arrIndex].transform.SetParent(rightHandPos);
+                break;
             case 2:
-                return rulerPivot;
-            case 3:
-                return brushPivot;
-            default:
-                return 0;
+                arrIndex = checkArrPivot(2) + 1;
+                shootObjectArr[2, arrIndex] = shootObjectControlSystem.releaseShootObject(2);
+                shootObjectArr[2, arrIndex].transform.position = rightHandPos.position;
+                shootObjectArr[2, arrIndex].transform.SetParent(rightHandPos);
+                break;
         }
     }
 
-    public void registerShootingObject(ref GameObject registerObject, int objectType)
+    public GameObject releaseShootObject()
     {
-        switch (objectType)
+        switch ((int)shootObjectState)
         {
+            case 0:
+                shootObjectArr[0, checkArrPivot(0)] = null;
+                currentOnHandShootObject.transform.SetParent(null);
+                return currentOnHandShootObject;
             case 1:
-                chalkArr[chalkPivot] = registerObject;
-                registerObject.SetActive(false);
-                chalkPivot++;
-                break;
+                shootObjectArr[1, checkArrPivot(1)] = null;
+                currentOnHandShootObject.transform.SetParent(null);
+                return currentOnHandShootObject;
             case 2:
-                rulerArr[rulerPivot] = registerObject;
-                registerObject.SetActive(false);
-                rulerPivot++;
-                break;
-            case 3:
-                brushArr[brushPivot] = registerObject;
-                registerObject.SetActive(false);
-                brushPivot++;
-                break;
+                shootObjectArr[2, checkArrPivot(2)] = null;
+                currentOnHandShootObject.transform.SetParent(null);
+                return currentOnHandShootObject;
             default:
-                break;
-        }
-    }
-
-    public void releaseShootingObject(ref GameObject currentShootingObject)
-    {
-        switch (playerInventoryObjectState)
-        {
-            case PlayerInventoryObjectState.Chalk:
-                currentShootingObject = chalkArr[chalkPivot];
-                currentShootingObject.transform.position = chalk.transform.position;
-                chalkArr[chalkPivot] = null;
-                chalkPivot--;
-                break;
-            case PlayerInventoryObjectState.Ruler:
-                currentShootingObject = rulerArr[rulerPivot];
-                currentShootingObject.transform.position = ruler.transform.position;
-                rulerArr[rulerPivot] = null;
-                rulerPivot--;
-                break;
-            case PlayerInventoryObjectState.Brush:
-                currentShootingObject = brushArr[brushPivot];
-                currentShootingObject.transform.position = brush.transform.position;
-                brushArr[brushPivot] = null;
-                brushPivot--;
-                break;
-            default:
-                break;
+                return null;
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class StudentControl : MonoBehaviour
 {
     public StudentSpawn studentSpawn;
-    public StudentBehavior[] student;
+    private StudentBehavior[] student;
     private int totalStudentSeatPos;
 
     void Start()
