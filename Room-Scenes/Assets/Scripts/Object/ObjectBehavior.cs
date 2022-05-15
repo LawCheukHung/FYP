@@ -18,7 +18,7 @@ public class ObjectBehavior : MonoBehaviour
     {
         if (isHoldingOnHand)
         {
-            playerBehavior.dropTargetObject();
+            //playerBehavior.dropTargetObject();
             dropObject();
         }
     }

@@ -10,7 +10,7 @@ public class StudentControl : MonoBehaviour
 
     void Start()
     {
-        totalStudentSeatPos = studentSpawn.getTotalStudentSeatPos();
+        //totalStudentSeatPos = studentSpawn.getTotalStudentSeatPos();
         student = new StudentBehavior[totalStudentSeatPos];
         registerAllStudent();
     }
@@ -19,7 +19,7 @@ public class StudentControl : MonoBehaviour
     {
         for(int i = 0; i < student.Length; i++)
         {
-            student[i].initStudentState();
+            //student[i].initStudentState();
         }
     }
 

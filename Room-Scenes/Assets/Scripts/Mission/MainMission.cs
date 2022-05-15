@@ -74,4 +74,9 @@ public class MainMission : MonoBehaviour
     {
         badStudentAmount += changeValue;
     }
+
+    public float getTimer()
+    {
+        return timer;
+    }
 }

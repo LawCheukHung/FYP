@@ -49,7 +49,7 @@ public class PlayerSkill : MonoBehaviour
 
     private void teachingBoost()
     {
-        mainMission.boostTeachingProgress(3f);
+        //mainMission.boostTeachingProgress(3f);
         isTeachingBoostTriggered = true;
         isCountingTeachingBoostDuration = true;
     }
@@ -62,7 +62,7 @@ public class PlayerSkill : MonoBehaviour
         }
         else
         {
-            mainMission.boostTeachingProgress(1f);
+            //mainMission.boostTeachingProgress(1f);
             teachingBoostDuration = 8f;
             isCountingTeachingBoostDuration = false;
         }
