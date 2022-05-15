@@ -1,19 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class MainMission : MonoBehaviour
 {
-    public GamingUI gamingUI;
-    public EndGameUI endGameUI;
+    public EndGame endGame;
+    public Text timerText;
+    public Text teachingProgressText;
     private float timer = 180f;
     private float teachingProgress = 100f;
-    private float boostingMultiply = 1f;
     private bool isTeaching = false;
     private int badStudentAmount = 0;
 
+    void Start()
+    {
+        timerText.text = "Lesson Remaining Time: " + (int)timer;
+        teachingProgressText.text = "Teaching Progress: " + (int)teachingProgress + "%";
+    }
+
     void Update()
     {
+        Debug.Log(badStudentAmount);
         checkMainMission();
         changeTeachingProgress();
     }
@@ -22,11 +30,12 @@ public class MainMission : MonoBehaviour
     {
         if (timer <= 0 || teachingProgress <= 0)
         {
-            endGameUI.setIsEndGame();
+            endGame.setIsEndGame();
         }
         else
         {
             timer -= Time.deltaTime;
+            timerText.text = "Lesson Remaining Time: " + (int)timer;
         }
     }
 
@@ -36,7 +45,8 @@ public class MainMission : MonoBehaviour
         {
             if(teachingProgress < 100)
             {
-                teachingProgress += boostingMultiply * Time.deltaTime;
+                teachingProgress += Time.deltaTime;
+                teachingProgressText.text = "Teaching Progress: " + (int)teachingProgress + "%";
             }
         }
         else
@@ -44,33 +54,24 @@ public class MainMission : MonoBehaviour
             if(teachingProgress > 0)
             {
                 teachingProgress -= Time.deltaTime;
+                teachingProgressText.text = "Teaching Progress: " + (int)teachingProgress + "%";
             }
+            
         }
     }
 
-    public void boostTeachingProgress(float acceleration)
+    public void setIsTeaching(bool isTeachingState)
     {
-        boostingMultiply = acceleration;
+        isTeaching = isTeachingState;
     }
 
-    public void setIsTeaching(bool currentState)
-    {
-        isTeaching = currentState;
-    }
-
-    public void changeBadStudentAmount(int changeAmount)
-    {
-        badStudentAmount += changeAmount;
-    }
-
-    //for counting final score
     public float getTeachingProgress()
     {
         return teachingProgress;
     }
 
-    public float getTimer()
+    public void changeBadStudentAmount(int changeValue)
     {
-        return timer;
+        badStudentAmount += changeValue;
     }
 }

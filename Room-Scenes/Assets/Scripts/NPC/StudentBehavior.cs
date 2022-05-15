@@ -8,47 +8,51 @@ public class StudentBehavior : MonoBehaviour
     private MainMission mainMission;
     private float badValue;
     private float mentalValue;
+    private bool isBadBad = false;
 
     void Start()
     {
         mainMission = GameObject.FindGameObjectWithTag("Mission").GetComponent<MainMission>();
-        initStudentState();
+        studentState = StudentState.Nice;
         badValue = Random.Range(1f, 1.5f);
+        mentalValue = 20f;
     }
 
     void Update()
     {
         if(mentalValue <= 0)
         {
-            if(studentState != StudentState.Nice)
-                changeStudentState();
+            if(!isBadBad)
+            changeActionState();
         }
         else
         {
-            decreaseMentalValue();
+            countDownMentalValue();
         }
     }
 
-    public void initStudentState()
+    public void initialiseStudentState()
     {
         studentState = StudentState.Nice;
+        isBadBad = false;
         mentalValue = Random.Range(80f, 100f);
     }
 
-    private void decreaseMentalValue()
+    private void countDownMentalValue()
     {
         mentalValue -= badValue * Time.deltaTime;
     }
 
-    private void changeStudentState()
+    private void changeActionState()
     {
-        studentState = (StudentState)((int)Random.Range(1, 3));
+        studentState = (StudentState)((int)Random.Range(0, 3));
+        isBadBad = true;
         mainMission.changeBadStudentAmount(1);
     }
 
-    public int getStudentState()
+    public bool getIsBadBad()
     {
-        return (int)studentState;
+        return isBadBad;
     }
 
     public float getMentalValue()
